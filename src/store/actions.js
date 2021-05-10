@@ -1,0 +1,8 @@
+export const CREATE_SHORT_LINK = 'CREATE_SHORT_LINK';
+
+export const LOGOUT = 'LOGOUT';
+export const PROCESS_LOGIN = 'PROCESS_LOGIN';
+export const CLOSE_ACCOUNT = 'CLOSE_ACCOUNT';
+
+export const ADD_SUCCESS_TOAST = 'ADD_SUCCESS_TOAST';
+export const ADD_FAILURE_TOAST = 'ADD_FAILURE_TOAST';
