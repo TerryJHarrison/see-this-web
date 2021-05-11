@@ -44,9 +44,9 @@ async function apiCall(apiPath, body = {}){
   }
 }
 
-function handleCreateShortLinkResponse(store, response, link){
+function handleCreateShortLinkResponse(store, response){
   if(response.data.statusCode === 200){
-    store.dispatch(addSuccessToast('Short link created', `Use it now: seeth.is/l/${link}`, 10000));
+    store.dispatch(addSuccessToast('Short link created', `Use it now: seeth.is/l/${response.data.link}`, 10000));
   } else if(response.data.statusCode === 400){
     store.dispatch(addFailureToast('Already exists', 'That link already exists, try a different path'));
   } else {
@@ -67,7 +67,7 @@ const api = store => next => async action => {
         link: action.link,
         url: action.url
       });
-      handleCreateShortLinkResponse(store, response, action.link);
+      handleCreateShortLinkResponse(store, response);
       break;
     case actions.CLOSE_ACCOUNT:
       await userApiCall('', 'delete');

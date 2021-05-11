@@ -31,21 +31,21 @@ export const Home = ({createShortLink}) => {
         <h2>Create a link</h2>
         <Form onSubmit={handleSubmit}>
           <Form.Field>
-            <label>Link Path ("example" would create <a href="https://seeth.is/l/example">seeth.is/l/example</a>)</label>
-            <Form.Input
-              placeholder='example'
-              name='link'
-              value={link}
-              onChange={handleLinkChange}/>
-            <p>Leave blank for an easy to remember auto-generated path!</p>
-          </Form.Field>
-          <Form.Field>
             <label>Redirect URL</label>
             <Form.Input
               placeholder='https://seeth.is'
               name='url'
               value={url}
               onChange={handleUrlChange}/>
+          </Form.Field>
+          <Form.Field>
+            <label>Link Path ("example" would create <a href="https://seeth.is/l/example">seeth.is/l/example</a>)</label>
+            <Form.Input
+              placeholder='example'
+              name='link'
+              value={link}
+              onChange={handleLinkChange}/>
+            <p>Leave blank for an easy to remember auto-generated path! If the path you choose is already in use a new one will be created instead.</p>
           </Form.Field>
           <Button type='submit'>Create</Button>
         </Form>

@@ -8,6 +8,7 @@ import Header from "./components/Header";
 import Home from "./pages/Home";
 import Example from "./pages/Example";
 import API from "./pages/API";
+import Collections from "./pages/Collections";
 import Register from "./pages/Register";
 import Footer from "./components/Footer";
 import ToastDisplay from "./components/ToastDisplay";
@@ -24,7 +25,7 @@ function AppRouter() {
             <Home/>
           </Route>
           <Route path="/collections">
-            <Register/>
+            <Collections/>
           </Route>
           <Route path="/api">
             <API/>
