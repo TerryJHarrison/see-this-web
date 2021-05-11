@@ -23,7 +23,7 @@ export const Home = ({createShortLink}) => {
     <Segment>
       <Container textAlign='center'>
         <h1>SeeThi.is</h1>
-        <p>Short links generator helping to make the web an easier to read place!</p>
+        <p>Short links generator - helping to make the web an easier place to read and navigate!</p>
       </Container>
       <Container>
         <h2>How to Use</h2>

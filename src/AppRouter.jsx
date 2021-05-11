@@ -12,6 +12,8 @@ import Register from "./pages/Register";
 import Footer from "./components/Footer";
 import ToastDisplay from "./components/ToastDisplay";
 
+import './css/index.css'
+
 function AppRouter() {
   return (
     <Router>
