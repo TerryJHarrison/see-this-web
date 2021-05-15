@@ -8,3 +8,10 @@ export const createShortLink = (link, url) => ({
     throttle: 3000
   }
 });
+
+export const getOwnedLinks = () => ({
+  type: actions.GET_OWNED_LINKS,
+  meta: {
+    throttle: 3000
+  }
+});

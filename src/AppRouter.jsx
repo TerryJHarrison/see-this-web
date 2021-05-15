@@ -9,42 +9,51 @@ import Home from "./pages/Home";
 import Example from "./pages/Example";
 import API from "./pages/API";
 import Collections from "./pages/Collections";
-import Register from "./pages/Register";
+import Profile from "./pages/Profile";
 import Footer from "./components/Footer";
+import Login from "./components/authentication/Login"
+import Logout from "./components/authentication/Logout"
+import Register from "./components/authentication/Register"
+import LoginCallback from "./components/authentication/LoginCallback"
+import LogoutCallback from "./components/authentication/LogoutCallback"
+import RegisterCallback from "./components/authentication/RegisterCallback"
+import ConfirmCloseAccount from "./components/authentication/ConfirmCloseAccount"
+import PrivateRoute from "./components/authentication/PrivateRoute"
 import ToastDisplay from "./components/ToastDisplay";
 
 import './css/index.css'
+import {connect} from "react-redux";
 
-function AppRouter() {
+const AppRouter = ({checked}) => {
   return (
     <Router>
       <Header/>
       <Container>
+        {checked &&
         <Switch>
-          <Route exact path="/">
-            <Home/>
-          </Route>
-          <Route path="/collections">
-            <Collections/>
-          </Route>
-          <Route path="/api">
-            <API/>
-          </Route>
-          <Route path="/register">
-            <Register/>
-          </Route>
-          <Route path="/login">
-            <Register/>
-          </Route>
-          <Route path="/example">
-            <Example/>
-          </Route>
+          <Route exact path="/" component={Home}/>
+          <Route path="/collections" component={Collections}/>
+          <Route path="/api" component={API}/>
+          <Route path="/example" component={Example}/>
+          <Route path="/register" exact component={Register}/>
+          <Route path="/login" exact component={Login}/>
+          <Route path="/logout" exact component={Logout}/>
+          <Route path="/authorize/register" component={RegisterCallback}/>
+          <Route path="/authorize/login" component={LoginCallback}/>
+          <Route path="/authorize/logout" component={LogoutCallback}/>
+          <PrivateRoute path="/profile" exact component={Profile}/>
+          <PrivateRoute path="/profile/close" exact component={ConfirmCloseAccount}/>
         </Switch>
+        }
         <ToastDisplay key="toasts-display"/>
+        <Footer/>
       </Container>
-      <Footer/>
     </Router>
   );
 }
 
-export default AppRouter;
+const mapStateToProps = state => ({
+  checked: state.session.checked
+});
+
+export default connect(mapStateToProps)(AppRouter);

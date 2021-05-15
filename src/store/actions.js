@@ -1,4 +1,7 @@
 export const CREATE_SHORT_LINK = 'CREATE_SHORT_LINK';
+export const ADD_CREATED_LINK = 'ADD_CREATED_LINK';
+export const GET_OWNED_LINKS = 'GET_OWNED_LINKS';
+export const SET_OWNED_LINKS = 'SET_OWNED_LINKS';
 
 export const LOGOUT = 'LOGOUT';
 export const PROCESS_LOGIN = 'PROCESS_LOGIN';

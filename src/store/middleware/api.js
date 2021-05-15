@@ -1,76 +1,63 @@
 import * as actions from '../actions';
 import {sessionService} from 'redux-react-session';
 import {addFailureToast, addSuccessToast} from "../actions/toasts";
+import {addCreatedLink, setOwnedLinks} from "../actions/links";
+
 const axios = require('axios').default;
 
-/**
- * Creates default POST request options
- * @param token {?null | string} Signed JWT
- * @param method {'get' | 'post' | 'put' | 'patch'}
- * @param body {?null | object}
- */
-function requestOptions(body = null, method = 'post', token = null) {
-  const options = {
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    method: method,
-    body: body,
-    mode: 'no-cors'
-  };
-
-  if(token !== null){
-    options.headers.Authorization = token;
-  }
-
-  return options;
+async function apiPost(apiPath, body = {}){
+  return await axios.post(`https://api.seeth.is/${apiPath}`, body);
 }
 
-/**
- * Makes POST (by default) requests to SeeTh.is API
- * @param apiPath {string} URL path to call
- * @param body {{}} Request body
- * @return {Promise<any>}
- */
-async function apiCall(apiPath, body = {}){
-  try {
-    return await axios.post(`https://api.seeth.is/${apiPath}`, body);
-  } catch (e){
-    console.error(e);
-    return {"data": {
-      'statusCode': 500,
-      'message': 'Could not generate short link'
-    }};
-  }
-}
-
-function handleCreateShortLinkResponse(store, response){
-  if(response.data.statusCode === 200){
-    store.dispatch(addSuccessToast('Short link created', `Use it now: seeth.is/l/${response.data.link}`, 10000));
-  } else if(response.data.statusCode === 400){
-    store.dispatch(addFailureToast('Already exists', 'That link already exists, try a different path'));
-  } else {
-    store.dispatch(addFailureToast('Uh-oh!', 'Could not create short link, please try again in a few minutes.'));
-  }
-}
-
-async function userApiCall(apiPath, method = 'get', body = null){
+async function userApiGet(apiPath){
   const session = await sessionService.loadSession();
-  const response = await fetch(`https://api.seeth.is/users/${apiPath}`, requestOptions(session.token, method, body));
-  return response.json();
+  return await axios.get(`https://api.seeth.is/${apiPath}`, {headers: {'Authorization': session.token}})
+}
+
+async function userApiPut(apiPath, body = {}){
+  const session = await sessionService.loadSession();
+  return await axios.put(`https://api.seeth.is/${apiPath}`, body, {headers: {'Authorization': session.token}})
+}
+
+async function userApiDelete(apiPath){
+  const session = await sessionService.loadSession();
+  return await axios.delete(`https://api.seeth.is/${apiPath}`, {headers: {'Authorization': session.token}})
 }
 
 const api = store => next => async action => {
   switch(action.type){
     case actions.CREATE_SHORT_LINK:
-      const response = await apiCall('links', {
+      const data = store.getState();
+      const body = {
         link: action.link,
         url: action.url
-      });
-      handleCreateShortLinkResponse(store, response);
+      };
+      try {
+        let response;
+        if(data.session.authenticated){
+          response = await userApiPut('links', body)
+        } else {
+          response = await apiPost('links', body);
+        }
+
+        console.info("response", response);
+        store.dispatch(addCreatedLink(response.data.link, action.url));
+        store.dispatch(addSuccessToast('Short link created', `Use it now: seeth.is/l/${response.data.link}`, 10000));
+      } catch(e){
+        console.info("error", e);
+        if(e.response.status === 400){
+          store.dispatch(addFailureToast('Already exists', 'That link already exists, try a different path'));
+        } else {
+          store.dispatch(addFailureToast('Uh-oh!', 'Could not create short link, please try again in a few minutes.'));
+        }
+      }
+      break;
+    case actions.GET_OWNED_LINKS:
+      const response = await userApiGet('links/owned');
+      store.dispatch(setOwnedLinks(response["data"]))
       break;
     case actions.CLOSE_ACCOUNT:
-      await userApiCall('', 'delete');
+      await userApiDelete('accounts');
       break;
     default:
       break;

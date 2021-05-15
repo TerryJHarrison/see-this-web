@@ -7,6 +7,10 @@ const initialState = {
   toasts: {
     toasts: [],
     counter: 0
+  },
+  links: {
+    owned: [],
+    created: []
   }
 };
 

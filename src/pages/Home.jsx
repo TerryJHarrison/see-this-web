@@ -1,7 +1,9 @@
-import {Button, Container, Form, Segment} from "semantic-ui-react";
+import {Button, Container, Divider, Form, Segment} from "semantic-ui-react";
 import {useState} from "react";
 import {connect} from "react-redux";
 import {createShortLink} from "../store/actions/api";
+import CreatedLinks from "../components/CreatedLinks";
+import {Link} from "react-router-dom";
 
 export const Home = ({createShortLink}) => {
   const [link, setLink] = useState('');
@@ -22,12 +24,10 @@ export const Home = ({createShortLink}) => {
   return (
     <Segment>
       <Container textAlign='center'>
-        <h1>SeeThi.is</h1>
+        <h1>SeeTh.is</h1>
         <p>Short links generator - helping to make the web an easier place to read and navigate!</p>
       </Container>
       <Container>
-        <h2>How to Use</h2>
-        <p>Enter in your desired short link path (or leave blank for an auto-generated one) and the URL you wish to link to. Submit and your link will be active within seconds! All generated links follow the form of <a href='https://seeth.is/l/easy-to-read'>seeth.is/l/easy-to-read</a>. Links will stay active for 7 days.</p>
         <h2>Create a link</h2>
         <Form onSubmit={handleSubmit}>
           <Form.Field>
@@ -47,8 +47,11 @@ export const Home = ({createShortLink}) => {
               onChange={handleLinkChange}/>
             <p>Leave blank for an easy to remember auto-generated path! If the path you choose is already in use a new one will be created instead.</p>
           </Form.Field>
-          <Button type='submit'>Create</Button>
+          <Button type='submit' color="green">Create</Button>
         </Form>
+        <CreatedLinks/>
+        <Divider horizontal>How To Use</Divider>
+        <p>Enter in your desired short link path (or leave blank for an auto-generated one) and the URL you wish to link to. Submit and your link will be active within seconds! All generated links follow the form of <a href='https://seeth.is/l/easy-to-read'>seeth.is/l/easy-to-read</a>. Links will stay active for 7 days or <Link to="/register">register now</Link> to keep them active for 14 days.</p>
       </Container>
     </Segment>
   );

@@ -1,7 +1,8 @@
 import {Grid, GridColumn, GridRow, Segment} from "semantic-ui-react";
 import {NavLink} from "react-router-dom";
+import {connect} from "react-redux";
 
-function Header() {
+const Header = ({checked, authenticated, username}) => {
   return (
     <Segment raised>
       <Grid columns={3}>
@@ -14,7 +15,12 @@ function Header() {
               <GridRow align="center">
                 <GridColumn><NavLink to="/collections">Collections</NavLink></GridColumn>
                 <GridColumn><NavLink to="/api">API</NavLink></GridColumn>
-                <GridColumn><NavLink to="/register">Register</NavLink></GridColumn>
+                <GridColumn>
+                  { checked && authenticated ?
+                    <NavLink to="/profile">@{username}</NavLink> :
+                    <NavLink to="/login">Login</NavLink>
+                  }
+                </GridColumn>
               </GridRow>
             </Grid>
           </GridColumn>
@@ -24,4 +30,10 @@ function Header() {
   );
 }
 
-export default Header;
+const mapStateToProps = state => ({
+  authenticated: state.session.authenticated,
+  checked: state.session.checked,
+  username: state.session.user.username
+});
+
+export default connect(mapStateToProps)(Header);
