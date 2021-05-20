@@ -37,8 +37,9 @@ export const LoginCallback = ({processLogin, logout}) => {
         if(numRetries < MAX_LOGIN_RETRY_ATTEMPTS){
           getCredentials();
           setNumRetries(numRetries + ONE);
+        } else {
+          logout();
         }
-        logout();
       } else {
 
         const cognito = new AWS.CognitoSyncManager();

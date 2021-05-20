@@ -10,7 +10,7 @@ function links(state = {}, action) {
       return Object.assign({}, state, {
         created: [...state.created, {
           link: action.link,
-          url: action.url
+          redirectUrl: action.redirectUrl
         }]
       });
     default:

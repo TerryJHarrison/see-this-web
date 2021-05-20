@@ -51,14 +51,16 @@ const OwnedLinks = ({ownedLinks, getOwnedLinks}) => {
             <TableHeaderCell>Link</TableHeaderCell>
             <TableHeaderCell>URL</TableHeaderCell>
             <TableHeaderCell>Expires</TableHeaderCell>
+            <TableHeaderCell># Clicks</TableHeaderCell>
           </TableRow>
         </TableHeader>
         <TableBody>
           {ownedLinks.map(l =>
             <TableRow key={l.link}>
               <TableCell>seeth.is/l/{l.link}</TableCell>
-              <TableCell>{l.url}</TableCell>
+              <TableCell>{l.redirectUrl}</TableCell>
               <TableCell>{l.expiresAt ? `${new Date(l.expiresAt * 1000).toLocaleString()}` : 'Never!'}</TableCell>
+              <TableCell>{l.clickCount}</TableCell>
             </TableRow>
           )}
         </TableBody>

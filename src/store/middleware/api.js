@@ -30,7 +30,7 @@ const api = store => next => async action => {
       const data = store.getState();
       const body = {
         link: action.link,
-        url: action.url
+        redirectUrl: action.url
       };
       try {
         let response;

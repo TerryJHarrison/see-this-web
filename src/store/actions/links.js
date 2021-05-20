@@ -1,9 +1,9 @@
 import * as actions from '../actions';
 
-export const addCreatedLink = (link, url) => ({
+export const addCreatedLink = (link, redirectUrl) => ({
   type: actions.ADD_CREATED_LINK,
   link: link,
-  url: url
+  redirectUrl: redirectUrl
 });
 
 export const setOwnedLinks = links => ({

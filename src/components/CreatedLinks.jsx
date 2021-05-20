@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {
   Card,
   CardGroup,
-  Divider, Icon,
+  Divider
 } from "semantic-ui-react";
 
 const CreatedLinks = ({createdLinks}) => {
@@ -19,9 +19,9 @@ const CreatedLinks = ({createdLinks}) => {
       <CardGroup>
         {createdLinks.map(l =>
           <Card key={l.link}
-            href={l.url}
-            header={l.link}
-            meta={l.url}
+            href={`https://seeth.is/l/${l.link}`}
+            header={`https://seeth.is/l/${l.link}`}
+            meta={l.redirectUrl}
           />
         )}
       </CardGroup>

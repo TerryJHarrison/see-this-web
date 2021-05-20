@@ -14,14 +14,14 @@ function API() {
             <CardMeta>POST https://api.seeth.is/links</CardMeta>
             <CardDescription>
               <Segment basic compact textAlign='center'>
-                Expects a JSON body with two fields: link and url. Link field can be left blank or omitted for an auto-generated path.
+                Expects a JSON body with two fields: link and redirectUrl. Link field can be left blank or omitted for an auto-generated path.
               </Segment>
               <Segment inverted textAlign='left'>
                 <b>POST</b> <i>https://api.seeth.is/links</i><br/><br/>
                 Choose your link:
-                <blockquote><pre>{'{'}<br/>&nbsp;&nbsp;"link": "example",<br/>&nbsp;&nbsp;"url": "test.com"<br/>{'}'}</pre></blockquote>
+                <blockquote><pre>{'{'}<br/>&nbsp;&nbsp;"link": "example",<br/>&nbsp;&nbsp;"redirectUrl": "test.com"<br/>{'}'}</pre></blockquote>
                 Generate link:
-                <blockquote><pre>{'{'}<br/>&nbsp;&nbsp;"url": "test.com"<br/>{'}'}</pre></blockquote>
+                <blockquote><pre>{'{'}<br/>&nbsp;&nbsp;"redirectUrl": "test.com"<br/>{'}'}</pre></blockquote>
               </Segment>
             </CardDescription>
           </Card>
