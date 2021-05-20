@@ -20,7 +20,7 @@ const CreatedLinks = ({createdLinks}) => {
         {createdLinks.map(l =>
           <Card key={l.link}
             href={`https://seeth.is/l/${l.link}`}
-            header={`https://seeth.is/l/${l.link}`}
+            header={`seeth.is/l/${l.link}`}
             meta={l.redirectUrl}
           />
         )}
