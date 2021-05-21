@@ -74,12 +74,11 @@ const api = store => next => async action => {
       break;
     case actions.DELETE_SHORT_LINK:
       try {
-        let response = await userApiDelete('links', {
+        await userApiDelete('links', {
           link: action.link
         })
 
-        store.dispatch(addCreatedLink(response.data.link, action.url));
-        store.dispatch(addSuccessToast('Short link updated', `Use it now: seeth.is/l/${response.data.link}`, 10000));
+        store.dispatch(addSuccessToast('Short link deleted', "It's gone. Recreate it now if you want to claim the link", 10000));
       } catch(e){
         if(e.response.status === 400){
           store.dispatch(addFailureToast('Bad request', 'Make sure you entered all data correctly'));
