@@ -1,0 +1,18 @@
+image: lawncareplanners/aws-sam-py37-node14:latest
+pipelines:
+  branches:
+    develop:
+      - step:
+          name: Build and run unit tests
+          caches:
+            - node
+          script:
+            - npm install
+            - npm run test
+          artifacts:
+            - "**"
+      - step:
+          name: Deploy
+          deployment: production
+          script:
+            - npm run deploy
