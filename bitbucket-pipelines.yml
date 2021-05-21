@@ -3,12 +3,11 @@ pipelines:
   branches:
     develop:
       - step:
-          name: Build and run unit tests
+          name: Install dependencies
           caches:
             - node
           script:
             - npm install
-            - npm run test
           artifacts:
             - "**"
       - step:
