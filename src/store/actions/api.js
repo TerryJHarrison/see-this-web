@@ -9,6 +9,23 @@ export const createShortLink = (link, url) => ({
   }
 });
 
+export const updateShortLink = (link, url) => ({
+  type: actions.UPDATE_SHORT_LINK,
+  link: link,
+  url: url,
+  meta: {
+    throttle: 1500
+  }
+});
+
+export const deleteShortLink = link => ({
+  type: actions.DELETE_SHORT_LINK,
+  link: link,
+  meta: {
+    throttle: 1500
+  }
+});
+
 export const getOwnedLinks = () => ({
   type: actions.GET_OWNED_LINKS,
   meta: {

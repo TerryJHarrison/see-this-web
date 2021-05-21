@@ -11,8 +11,6 @@ const CreatedLinks = ({createdLinks}) => {
       return null;
   }
 
-  console.info(createdLinks);
-
   return (
     <Fragment>
       <Divider horizontal>Created Links</Divider>
