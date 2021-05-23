@@ -13,6 +13,8 @@ import {
   TableRow
 } from "semantic-ui-react";
 import {getOwnedLinks} from "../store/actions/api";
+import {addSuccessToast} from "../store/actions/toasts";
+import OwnedLinksActions from "./OwnedLinksActions";
 
 const OwnedLinks = ({ownedLinks, getOwnedLinks}) => {
   const [isLoaded, setLoaded] = useState(false);
@@ -52,6 +54,7 @@ const OwnedLinks = ({ownedLinks, getOwnedLinks}) => {
             <TableHeaderCell>URL</TableHeaderCell>
             <TableHeaderCell>Expires</TableHeaderCell>
             <TableHeaderCell># Clicks</TableHeaderCell>
+            <TableHeaderCell>Actions</TableHeaderCell>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -61,6 +64,7 @@ const OwnedLinks = ({ownedLinks, getOwnedLinks}) => {
               <TableCell>{l.redirectUrl}</TableCell>
               <TableCell>{l.expiresAt ? `${new Date(l.expiresAt * 1000).toLocaleString()}` : 'Never!'}</TableCell>
               <TableCell>{l.clickCount}</TableCell>
+              <TableCell><OwnedLinksActions link={l.link}/></TableCell>
             </TableRow>
           )}
         </TableBody>
@@ -70,7 +74,8 @@ const OwnedLinks = ({ownedLinks, getOwnedLinks}) => {
 }
 
 const actionCreators = {
-  getOwnedLinks
+  getOwnedLinks,
+  addSuccessToast
 };
 
 const mapStateToProps = state => ({

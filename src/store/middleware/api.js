@@ -1,7 +1,8 @@
 import * as actions from '../actions';
 import {sessionService} from 'redux-react-session';
 import {addFailureToast, addSuccessToast} from "../actions/toasts";
-import {addCreatedLink, setOwnedLinks} from "../actions/links";
+import {addCreatedLink, removeOwnedLink, setOwnedLinks} from "../actions/links";
+import {getOwnedLinks} from "../actions/api";
 
 const axios = require('axios').default;
 
@@ -24,9 +25,9 @@ async function userApiPatch(apiPath, body = {}){
   return await axios.patch(`https://api.seeth.is/${apiPath}`, body, {headers: {'Authorization': session.token}})
 }
 
-async function userApiDelete(apiPath){
+async function userApiDelete(apiPath, body = {}){
   const session = await sessionService.loadSession();
-  return await axios.delete(`https://api.seeth.is/${apiPath}`, {headers: {'Authorization': session.token}})
+  return await axios.delete(`https://api.seeth.is/${apiPath}`, {headers: {'Authorization': session.token}, data: body})
 }
 
 const api = store => next => async action => {
@@ -57,13 +58,14 @@ const api = store => next => async action => {
       break;
     case actions.UPDATE_SHORT_LINK:
       try {
-        let response = await userApiPatch('links', {
+        await userApiPatch('links', {
           link: action.link,
           redirectUrl: action.url
         })
 
-        store.dispatch(addCreatedLink(response.data.link, action.url));
-        store.dispatch(addSuccessToast('Short link updated', `Use it now: seeth.is/l/${response.data.link}`, 10000));
+        store.dispatch(removeOwnedLink(action.link));
+        store.dispatch(getOwnedLinks());
+        store.dispatch(addSuccessToast('Short link updated', `Use it now: seeth.is/l/${action.link}`, 10000));
       } catch(e){
         if(e.response.status === 400){
           store.dispatch(addFailureToast('Bad request', 'Make sure you entered all data correctly'));
@@ -76,8 +78,9 @@ const api = store => next => async action => {
       try {
         await userApiDelete('links', {
           link: action.link
-        })
+        });
 
+        store.dispatch(removeOwnedLink(action.link));
         store.dispatch(addSuccessToast('Short link deleted', "It's gone. Recreate it now if you want to claim the link", 10000));
       } catch(e){
         if(e.response.status === 400){

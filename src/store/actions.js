@@ -4,6 +4,7 @@ export const DELETE_SHORT_LINK = 'DELETE_SHORT_LINK';
 export const ADD_CREATED_LINK = 'ADD_CREATED_LINK';
 export const GET_OWNED_LINKS = 'GET_OWNED_LINKS';
 export const SET_OWNED_LINKS = 'SET_OWNED_LINKS';
+export const REMOVE_OWNED_LINK = 'REMOVE_OWNED_LINK';
 
 export const LOGOUT = 'LOGOUT';
 export const PROCESS_LOGIN = 'PROCESS_LOGIN';
