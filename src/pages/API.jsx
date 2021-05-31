@@ -1,4 +1,14 @@
-import {Button, Card, CardDescription, CardGroup, CardHeader, CardMeta, Container, Segment} from "semantic-ui-react";
+import {
+  Button,
+  Card,
+  CardDescription,
+  CardGroup,
+  CardHeader,
+  CardMeta,
+  Container,
+  Divider,
+  Segment
+} from "semantic-ui-react";
 
 function API() {
   return (
@@ -16,22 +26,28 @@ function API() {
               <Segment basic compact textAlign='center'>
                 Expects a JSON body with two fields: link and redirectUrl. Link field can be left blank or omitted for an auto-generated path.
               </Segment>
-              <Segment inverted textAlign='left'>
+              <Divider/>
+              <Segment basic textAlign='left'>
                 <b>POST</b> <i>https://api.seeth.is/links</i><br/><br/>
                 Choose your link:
-                <blockquote><pre>{'{'}<br/>&nbsp;&nbsp;"link": "example",<br/>&nbsp;&nbsp;"redirectUrl": "test.com"<br/>{'}'}</pre></blockquote>
+                <pre>{'{'}<br/>&nbsp;&nbsp;"link": "example",<br/>&nbsp;&nbsp;"redirectUrl": "test.com"<br/>{'}'}</pre>
                 Generate link:
-                <blockquote><pre>{'{'}<br/>&nbsp;&nbsp;"redirectUrl": "test.com"<br/>{'}'}</pre></blockquote>
+                <pre>{'{'}<br/>&nbsp;&nbsp;"redirectUrl": "test.com"<br/>{'}'}</pre>
               </Segment>
             </CardDescription>
           </Card>
           <Card>
-            <CardHeader>Get most used short link</CardHeader>
-            <CardMeta>Coming soon...</CardMeta>
-          </Card>
-          <Card>
-            <CardHeader>Get last created link</CardHeader>
-            <CardMeta>Coming soon...</CardMeta>
+            <CardHeader>Get short link stats</CardHeader>
+            <CardMeta>GET https://api.seeth.is/links/stats</CardMeta>
+            <CardDescription>
+              <Segment basic compact textAlign='center'>
+                Simple GET request. No message body or parameters, try it out in your browser. Returns most clicked active link and most recently created short link.
+              </Segment>
+              <Divider/>
+              <Segment basic textAlign='left'>
+                <b>GET</b> <i>https://api.seeth.is/links/stats</i>
+              </Segment>
+            </CardDescription>
           </Card>
         </CardGroup>
       </Container>

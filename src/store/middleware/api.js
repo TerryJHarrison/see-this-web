@@ -1,7 +1,7 @@
 import * as actions from '../actions';
 import {sessionService} from 'redux-react-session';
 import {addFailureToast, addSuccessToast} from "../actions/toasts";
-import {addCreatedLink, removeOwnedLink, setOwnedLinks} from "../actions/links";
+import {addCreatedLink, removeOwnedLink, setLinkCollection, setOwnedLinks} from "../actions/links";
 import {getOwnedLinks} from "../actions/api";
 
 const axios = require('axios').default;
@@ -90,10 +90,14 @@ const api = store => next => async action => {
         }
       }
       break;
-    case actions.GET_OWNED_LINKS:
+    case actions.GET_OWNED_LINKS: {
       const response = await userApiGet('links');
       store.dispatch(setOwnedLinks(response["data"]))
-      break;
+    } break;
+    case actions.GET_LINK_COLLECTION: {
+      const response = await userApiGet('collections/test');
+      store.dispatch(setLinkCollection(response["data"]))
+    } break;
     case actions.CLOSE_ACCOUNT:
       await userApiDelete('accounts');
       break;

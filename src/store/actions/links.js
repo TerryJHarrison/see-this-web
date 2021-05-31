@@ -15,3 +15,8 @@ export const removeOwnedLink = link => ({
   type: actions.REMOVE_OWNED_LINK,
   link: link
 })
+
+export const setLinkCollection = collection => ({
+  type: actions.SET_LINK_COLLECTION,
+  collection: collection
+})

@@ -10,7 +10,8 @@ const initialState = {
   },
   links: {
     owned: [],
-    created: []
+    created: [],
+    activeCollection: {}
   }
 };
 

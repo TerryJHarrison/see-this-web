@@ -32,3 +32,11 @@ export const getOwnedLinks = () => ({
     throttle: 3000
   }
 });
+
+export const getLinkCollection = (id) => ({
+  type: actions.GET_LINK_COLLECTION,
+  id: id,
+  meta: {
+    throttle: 3000
+  }
+});

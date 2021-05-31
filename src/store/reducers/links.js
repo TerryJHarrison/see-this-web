@@ -6,6 +6,10 @@ function links(state = {}, action) {
       return Object.assign({}, state, {
         owned: action.links['links']
       });
+    case actions.SET_LINK_COLLECTION:
+      return Object.assign({}, state, {
+        activeCollection: action.collection
+      });
     case actions.REMOVE_OWNED_LINK:
       return Object.assign({}, state, {
         owned: state.owned.filter(l => l.link !== action.link)

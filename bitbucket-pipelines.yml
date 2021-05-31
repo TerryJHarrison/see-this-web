@@ -1,4 +1,4 @@
-image: lawncareplanners/aws-sam-py37-node14:latest
+image: tjharrison/aws-sam-py37-node14:latest
 pipelines:
   branches:
     develop:

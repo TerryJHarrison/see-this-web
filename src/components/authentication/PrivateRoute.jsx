@@ -3,8 +3,9 @@ import { Route, Redirect } from 'react-router-dom';
 import {connect} from "react-redux";
 import {sessionService} from 'redux-react-session';
 import {logout} from "../../store/actions/auth";
+import PageLayout from "../layouts/PageLayout";
 
-const PrivateRoute = ({component, exact = false, path, authenticated, logout}) => {
+const PrivateRoute = ({component, exact = false, path, authenticated, logout, Layout = PageLayout}) => {
   useEffect(() => {
     async function checkSession(){
       const session = await sessionService.loadSession();
@@ -19,7 +20,7 @@ const PrivateRoute = ({component, exact = false, path, authenticated, logout}) =
     path={path}
     render={props =>
       authenticated ?
-        React.createElement(component, props)
+        <Layout component={React.createElement(component, props)}/>
         : (
           <Redirect to={{
             pathname: '/login',

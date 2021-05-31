@@ -1,16 +1,12 @@
-import {Container} from "semantic-ui-react";
 import {
   BrowserRouter as Router,
-  Switch,
-  Route
+  Switch
 } from "react-router-dom";
-import Header from "./components/Header";
 import Home from "./pages/Home";
 import Example from "./pages/Example";
 import API from "./pages/API";
 import Collections from "./pages/Collections";
 import Profile from "./pages/Profile";
-import Footer from "./components/Footer";
 import Login from "./components/authentication/Login"
 import Logout from "./components/authentication/Logout"
 import Register from "./components/authentication/Register"
@@ -23,31 +19,31 @@ import ToastDisplay from "./components/ToastDisplay";
 
 import './css/index.css'
 import {connect} from "react-redux";
+import LinkCollection from "./pages/LinkCollection";
+import PublicRoute from "./components/authentication/PublicRoute";
+import CollectionLayout from "./components/layouts/CollectionLayout";
 
 const AppRouter = ({checked}) => {
   return (
     <Router>
-      <Header/>
-      <Container>
         {checked &&
         <Switch>
-          <Route exact path="/" component={Home}/>
-          <Route path="/collections" component={Collections}/>
-          <Route path="/api" component={API}/>
-          <Route path="/example" component={Example}/>
-          <Route path="/register" exact component={Register}/>
-          <Route path="/login" exact component={Login}/>
-          <Route path="/logout" exact component={Logout}/>
-          <Route path="/authorize/register" component={RegisterCallback}/>
-          <Route path="/authorize/login" component={LoginCallback}/>
-          <Route path="/authorize/logout" component={LogoutCallback}/>
+          <PublicRoute exact path="/" component={Home}/>
+          <PublicRoute path="/collections" component={Collections}/>
+          <PublicRoute path="/api" component={API}/>
+          <PublicRoute path="/example" component={Example}/>
+          <PublicRoute path="/register" exact component={Register}/>
+          <PublicRoute path="/login" exact component={Login}/>
+          <PublicRoute path="/logout" exact component={Logout}/>
+          <PublicRoute path="/authorize/register" component={RegisterCallback}/>
+          <PublicRoute path="/authorize/login" component={LoginCallback}/>
+          <PublicRoute path="/authorize/logout" component={LogoutCallback}/>
           <PrivateRoute path="/profile" exact component={Profile}/>
           <PrivateRoute path="/profile/close" exact component={ConfirmCloseAccount}/>
+          <PublicRoute path="/portfolio" component={LinkCollection} Layout={CollectionLayout}/>
         </Switch>
         }
-        <ToastDisplay key="toasts-display"/>
-        <Footer/>
-      </Container>
+      <ToastDisplay key="toasts-display"/>
     </Router>
   );
 }
