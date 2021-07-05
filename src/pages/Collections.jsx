@@ -1,10 +1,13 @@
 import {Segment} from "semantic-ui-react";
+import OwnedLinkCollections from "../components/OwnedLinkCollections";
+import React from "react";
+import CreateLinkCollection from "../components/collections/CreateLinkCollection";
 
 function Collections() {
   return (
     <Segment>
-      <h2>Coming soon!</h2>
-      Create and curate link collections for people, places, and things.
+      <CreateLinkCollection/>
+      <OwnedLinkCollections/>
     </Segment>
   );
 }

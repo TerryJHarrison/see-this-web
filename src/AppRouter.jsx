@@ -22,6 +22,7 @@ import {connect} from "react-redux";
 import LinkCollection from "./pages/LinkCollection";
 import PublicRoute from "./components/authentication/PublicRoute";
 import CollectionLayout from "./components/layouts/CollectionLayout";
+import EditLinkCollection from "./components/collections/EditCollection";
 
 const AppRouter = ({checked}) => {
   return (
@@ -29,7 +30,7 @@ const AppRouter = ({checked}) => {
         {checked &&
         <Switch>
           <PublicRoute exact path="/" component={Home}/>
-          <PublicRoute path="/collections" component={Collections}/>
+          <PublicRoute exact path="/collections" component={Collections}/>
           <PublicRoute path="/api" component={API}/>
           <PublicRoute path="/example" component={Example}/>
           <PublicRoute path="/register" exact component={Register}/>
@@ -38,6 +39,7 @@ const AppRouter = ({checked}) => {
           <PublicRoute path="/authorize/register" component={RegisterCallback}/>
           <PublicRoute path="/authorize/login" component={LoginCallback}/>
           <PublicRoute path="/authorize/logout" component={LogoutCallback}/>
+          <PrivateRoute path="/profile/collections/:id" component={EditLinkCollection}/>
           <PrivateRoute path="/profile" exact component={Profile}/>
           <PrivateRoute path="/profile/close" exact component={ConfirmCloseAccount}/>
           <PublicRoute path="/portfolio" component={LinkCollection} Layout={CollectionLayout}/>

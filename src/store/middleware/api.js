@@ -1,8 +1,14 @@
 import * as actions from '../actions';
 import {sessionService} from 'redux-react-session';
 import {addFailureToast, addSuccessToast} from "../actions/toasts";
-import {addCreatedLink, removeOwnedLink, setLinkCollection, setOwnedLinks} from "../actions/links";
-import {getOwnedLinks} from "../actions/api";
+import {
+  addCreatedLink,
+  removeOwnedLink,
+  setLinkCollection,
+  setOwnedLinkCollections,
+  setOwnedLinks
+} from "../actions/links";
+import {getLinkCollection, getOwnedLinks} from "../actions/api";
 
 const axios = require('axios').default;
 
@@ -32,7 +38,7 @@ async function userApiDelete(apiPath, body = {}){
 
 const api = store => next => async action => {
   switch(action.type){
-    case actions.CREATE_SHORT_LINK:
+    case actions.CREATE_SHORT_LINK: {
       const data = store.getState();
       const body = {
         link: action.link,
@@ -40,7 +46,7 @@ const api = store => next => async action => {
       };
       try {
         let response;
-        if(data.session.authenticated){
+        if (data.session.authenticated) {
           response = await userApiPut('links', body)
         } else {
           response = await apiPost('links', body);
@@ -48,14 +54,15 @@ const api = store => next => async action => {
 
         store.dispatch(addCreatedLink(response.data.link, action.url));
         store.dispatch(addSuccessToast('Short link created', `Use it now: seeth.is/l/${response.data.link}`, 10000));
-      } catch(e){
-        if(e.response.status === 400){
+      } catch (e) {
+        if (e.response.status === 400) {
           store.dispatch(addFailureToast('Already exists', 'That link already exists, try a different path'));
         } else {
           store.dispatch(addFailureToast('Uh-oh!', 'Could not create short link, please try again in a few minutes.'));
         }
       }
       break;
+    }
     case actions.UPDATE_SHORT_LINK:
       try {
         await userApiPatch('links', {
@@ -90,13 +97,53 @@ const api = store => next => async action => {
         }
       }
       break;
+    case actions.CREATE_SHORT_LINK_COLLECTION: {
+      const data = store.getState();
+      const body = {
+        id: action.name.toLowerCase().split(" ").join("-"),
+        heading: action.name
+      };
+      try {
+        if (data.session.authenticated) {
+          await userApiPut('collections', body)
+        } else {
+          //TODO throw error
+        }
+
+        store.dispatch(getLinkCollection());
+      } catch (e) {
+        if (e.response.status === 400) {
+          store.dispatch(addFailureToast('Already exists', 'That link already exists, try a different path'));
+        } else {
+          store.dispatch(addFailureToast('Uh-oh!', 'Could not create short link, please try again in a few minutes.'));
+        }
+      }
+      break;
+    }
+    case actions.UPDATE_SHORT_LINK_COLLECTION:
+      const data = store.getState();
+      const {links: {activeCollection}} = data;
+      try {
+        if (data.session.authenticated) {
+          await userApiPatch('collections', activeCollection);
+        } else {
+          //TODO throw error
+        }
+      } catch (e) {
+        store.dispatch(addFailureToast('Uh-oh!', 'Could not update short link, please try again in a few minutes.'));
+      }
+      break;
     case actions.GET_OWNED_LINKS: {
       const response = await userApiGet('links');
-      store.dispatch(setOwnedLinks(response["data"]))
+      store.dispatch(setOwnedLinks(response["data"]));
+    } break;
+    case actions.GET_OWNED_LINK_COLLECTIONS: {
+      const response = await userApiGet('collections');
+      store.dispatch(setOwnedLinkCollections(response["data"]));
     } break;
     case actions.GET_LINK_COLLECTION: {
-      const response = await userApiGet('collections/test');
-      store.dispatch(setLinkCollection(response["data"]))
+      const response = await userApiGet(`collections/${action.id}`);
+      store.dispatch(setLinkCollection(response["data"]));
     } break;
     case actions.CLOSE_ACCOUNT:
       await userApiDelete('accounts');

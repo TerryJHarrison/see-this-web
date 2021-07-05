@@ -1,6 +1,5 @@
 import React, {Fragment} from 'react';
 import Header from "../Header";
-import Footer from "../Footer";
 import {Container} from "semantic-ui-react";
 
 const PageLayout = ({component}) => {
@@ -10,7 +9,6 @@ const PageLayout = ({component}) => {
       <Container>
         {component}
       </Container>
-      <Footer/>
     </Fragment>
   );
 }

@@ -45,7 +45,6 @@ export const Profile = ({email, username, logout, ownedLinks, closeAccount}) => 
           </GridColumn></GridRow>
           <GridRow columns={3}>
             <GridColumn><Button className="olive" onClick={logoutCall}>Logout</Button></GridColumn>
-            <GridColumn/>
             <GridColumn>
               <Button className="black" onClick={downloadFile}>Download My Data</Button>
               <Button className="black" onClick={closeAccountCall}>Close Account</Button>
