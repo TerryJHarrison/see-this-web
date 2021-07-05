@@ -17,11 +17,12 @@ export const CreatedLinkCollection = ({createShortLinkCollection}) => {
           <Label>Collection's URL Slug</Label> Choose wisely, this can't be changed later!
           <Form.Input placeholder='tjharrison' name='name' value={name} onChange={handleNameChange}/>
         </Form.Field>
-        <Button type='submit' color="green">Create https://seeth.is/portfolio/{name.toLowerCase().split(" ").join("-")}</Button>
+        <Button type='submit' color="green">Create</Button>
+        <Label>{name === "" ? "Enter slug to see URL" : `URL will be https://seeth.is/portfolio/${name.toLowerCase().split(" ").join("-")}`}</Label>
       </Form>
     </Segment>
   );
-}
+};
 
 const actionCreators = {
   createShortLinkCollection

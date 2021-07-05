@@ -1,7 +1,6 @@
 import {
   Button,
-  Container,
-  Dimmer, Divider, Form, Grid, GridColumn, GridRow,
+  Dimmer, Grid, GridColumn, GridRow,
   Header,
   Loader, Popup,
   Segment
@@ -29,7 +28,6 @@ const EditCollection = ({collection, getLinkCollection, addEmptyLinkToActiveColl
     updateShortLinkCollection(id, collection);
   };
 
-  //TODO: save button should save activeCollection to database
   return (
     <Segment>
       <Header as="h2">Edit link collection</Header>

@@ -101,7 +101,8 @@ const api = store => next => async action => {
       const data = store.getState();
       const body = {
         id: action.name.toLowerCase().split(" ").join("-"),
-        heading: action.name
+        heading: action.name,
+        collectionType: "portfolio"
       };
       try {
         if (data.session.authenticated) {
