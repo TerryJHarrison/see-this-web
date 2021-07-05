@@ -1,9 +1,9 @@
 import {
   Button,
   Container,
-  Dimmer,
+  Dimmer, Divider, Form, Grid, GridColumn, GridRow,
   Header,
-  Loader,
+  Loader, Popup,
   Segment
 } from "semantic-ui-react";
 import {connect} from "react-redux";
@@ -41,12 +41,18 @@ const EditCollection = ({collection, getLinkCollection, addEmptyLinkToActiveColl
         {collection.links.map(l =>
         <EditLink key={l.index} index={l.index} currentHeading={l.text} currentRedirectUrl={l.redirectUrl}/>
         )}
-        <Button onClick={addEmptyLinkToActiveCollection} icon="plus"/>
-        <Button type='submit' color="green" onClick={handleSave}>Save</Button>
-        <Container>
-          <Header as='h2'>Preview</Header>
-          <LinkCollectionPreview/>
-        </Container>
+        <Grid>
+          <GridRow columns={4}>
+            <GridColumn><Button type='submit' color="green" onClick={handleSave}>Save</Button></GridColumn>
+            <GridColumn width={1}/>
+            <GridColumn/>
+            <GridColumn width={1}>
+              <Popup content='Add new link' trigger={<Button onClick={addEmptyLinkToActiveCollection} icon="plus"/>}/>
+            </GridColumn>
+          </GridRow>
+        </Grid>
+        <Segment basic/>
+        <LinkCollectionPreview/>
       </Segment>}
     </Segment>
   );

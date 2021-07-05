@@ -1,4 +1,4 @@
-import {Button, Form, Grid, GridColumn, GridRow, Segment} from "semantic-ui-react";
+import {Button, Form, Grid, GridColumn, GridRow, Icon, Popup, Segment} from "semantic-ui-react";
 import {connect} from "react-redux";
 import {removeLinkFromActiveCollection} from "../../store/actions/api";
 import {useState} from "react";
@@ -27,15 +27,18 @@ const EditLink = ({index, currentHeading, currentRedirectUrl, removeLinkFromActi
       <Form>
         <Form.Field>
           <Grid>
-            <GridRow columns={3}>
+            <GridRow columns={4}>
               <GridColumn>
                 <Form.Input placeholder='SeeTh.is - Link Collections and Shortening' name='text' value={text} onChange={handleTextChange}/>
+              </GridColumn>
+              <GridColumn width={1} textAlign="center" verticalAlign="middle">
+                <Icon name="arrow circle right"/>
               </GridColumn>
               <GridColumn>
                 <Form.Input placeholder='https://seeth.is' name='redirectUrl' value={redirectUrl} onChange={handleRedirectUrlChange}/>
               </GridColumn>
-              <GridColumn>
-                <Button color='red' icon='delete' onClick={handleDeleteClick}/>
+              <GridColumn width={1}>
+                <Popup content='Remove link' trigger={<Button color='red' icon='delete' onClick={handleDeleteClick}/>}/>
               </GridColumn>
             </GridRow>
           </Grid>
