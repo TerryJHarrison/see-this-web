@@ -1,12 +1,14 @@
-import {Button, Form, Grid, GridColumn, GridRow, Icon, Popup, Segment} from "semantic-ui-react";
+import {Button, Form, Grid, GridColumn, GridRow, Icon, Modal, Popup, Segment} from "semantic-ui-react";
 import {connect} from "react-redux";
 import {removeLinkFromActiveCollection} from "../../store/actions/api";
-import {useState} from "react";
+import React, {useState} from "react";
 import {setLinkText, setLinkRedirectUrl} from "../../store/actions/links";
+import {useFormModal} from "../../hooks/useFormModal";
 
 const EditLink = ({index, currentHeading, currentRedirectUrl, removeLinkFromActiveCollection, setLinkText, setLinkRedirectUrl}) => {
   const [text, setText] = useState(currentHeading);
   const [redirectUrl, setRedirectUrl] = useState(currentRedirectUrl);
+  const [isOpen, open, close] = useFormModal();
 
   const handleTextChange = (e, {value}) => {
     setText(value);
@@ -38,7 +40,24 @@ const EditLink = ({index, currentHeading, currentRedirectUrl, removeLinkFromActi
                 <Form.Input placeholder='https://seeth.is' name='redirectUrl' value={redirectUrl} onChange={handleRedirectUrlChange}/>
               </GridColumn>
               <GridColumn width={1}>
-                <Popup content='Remove link' trigger={<Button color='red' icon='delete' onClick={handleDeleteClick}/>}/>
+                <Modal
+                  onOpen={open}
+                  onClose={close}
+                  open={isOpen}
+                  trigger={<Popup content='Remove link' trigger={<Button color='red' icon='delete' onClick={open}/>}/>}>
+                  <Modal.Header>Delete Your Account</Modal.Header>
+                  <Modal.Content>
+                    Are you sure you wish to delete this link from your collection?
+                  </Modal.Content>
+                  <Modal.Actions>
+                    <Button color='black' onClick={close}>
+                      Cancel
+                    </Button>
+                    <Button color='red' icon='delete' onClick={handleDeleteClick}>
+                      Delete
+                    </Button>
+                  </Modal.Actions>
+                </Modal>
               </GridColumn>
             </GridRow>
           </Grid>

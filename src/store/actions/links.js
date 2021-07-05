@@ -1,5 +1,4 @@
 import * as actions from '../actions';
-import {SET_LINK_TEXT} from "../actions";
 
 export const addCreatedLink = (link, redirectUrl) => ({
   type: actions.ADD_CREATED_LINK,

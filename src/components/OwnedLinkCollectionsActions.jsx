@@ -11,7 +11,7 @@ const OwnedLinksActions = ({collection}) => {
 
   return (
     <Fragment>
-          <Button positive onClick={updateLinkCollectionClick} icon="edit" compact circular/>
+      <Button positive onClick={updateLinkCollectionClick} icon="edit" compact circular/>
     </Fragment>
   )
 }
