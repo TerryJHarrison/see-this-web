@@ -8,6 +8,7 @@ const LinkCollectionPreview = ({collection}) => {
   return (
       <Fragment>
         <Header as='h2'>Preview</Header>
+        <Segment basic/>
         <Segment textAlign="center">
           <Header as="h1">{heading}</Header>
           <Header as="h3">{subheading}</Header>
