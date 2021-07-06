@@ -45,6 +45,17 @@ function links(state = {}, action) {
         })
       });
     }
+    case actions.SET_LINK_SHOULD_OPEN_IN_NEW_TAB: {
+      const links = state.activeCollection.links;
+      const link = links[action.index];
+      link.shouldOpenInNewTab = action.shouldOpenInNewTab;
+      links[action.index] = link;
+      return Object.assign([], state, {
+        activeCollection: Object.assign({}, state.activeCollection, {
+          links: links
+        })
+      });
+    }
     case actions.ADD_EMPTY_LINK_TO_ACTIVE_COLLECTION:
       return Object.assign([], state, {
         activeCollection: Object.assign({}, state.activeCollection, {

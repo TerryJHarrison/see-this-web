@@ -31,7 +31,8 @@ const LinkCollection = ({getLinkCollection, collection}) => {
           <Header as="h3">{subheading}</Header>
           <SegmentGroup raised>
             {links.map(l => <Segment color={l.color} inverted={l.inverted}>
-              <a href={l.redirectUrl}>{l.text}</a>
+              {l.shouldOpenInNewTab && <a href={l.redirectUrl} target="_blank" rel="noopener noreferrer">{l.text}</a>}
+              {!l.shouldOpenInNewTab && <a href={l.redirectUrl}>{l.text}</a>}
             </Segment>)}
           </SegmentGroup>
         </Segment>

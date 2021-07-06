@@ -1,4 +1,4 @@
-import {Form, Grid, GridColumn, GridRow, Segment} from "semantic-ui-react";
+import {Form, Grid, GridColumn, GridRow, Label, Segment} from "semantic-ui-react";
 import {connect} from "react-redux";
 import {setHeading} from "../../store/actions/links";
 import {useControlledFormInput} from "../../hooks/useControlledFormState";
@@ -13,7 +13,7 @@ const EditHeading = ({currentHeading, setHeading}) => {
           <Grid>
             <GridRow columns={1}>
               <GridColumn>
-                <label>Heading</label>
+                <Label attached="top left" ribbon>Heading</Label>
                 <Form.Input placeholder='Title of your Collection' name='text' value={heading} onChange={handleHeadingChange}/>
               </GridColumn>
             </GridRow>

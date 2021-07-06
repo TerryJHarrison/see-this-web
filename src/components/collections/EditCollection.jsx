@@ -37,7 +37,7 @@ const EditCollection = ({collection, getLinkCollection, addEmptyLinkToActiveColl
         <EditSubheading currentSubheading={collection.subheading}/>
         <Header as='h3'>Links</Header>
         {collection.links.map(l =>
-        <EditLink key={l.index} index={l.index} currentHeading={l.text} currentRedirectUrl={l.redirectUrl}/>
+        <EditLink key={l.index} link={l}/>
         )}
         <Grid>
           <GridRow columns={4}>
@@ -54,7 +54,7 @@ const EditCollection = ({collection, getLinkCollection, addEmptyLinkToActiveColl
       </Segment>}
     </Segment>
   );
-};
+}
 
 const mapStateToProps = state => ({
   collection: state.links.activeCollection
@@ -63,7 +63,7 @@ const mapStateToProps = state => ({
 const actionCreators = {
   updateShortLinkCollection,
   getLinkCollection,
-  addEmptyLinkToActiveCollection,
+  addEmptyLinkToActiveCollection
 };
 
 export default connect(mapStateToProps, actionCreators)(EditCollection);

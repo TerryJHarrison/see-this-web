@@ -50,3 +50,9 @@ export const setLinkRedirectUrl = (index, redirectUrl) => ({
   index: index,
   redirectUrl: redirectUrl
 });
+
+export const setLinkShouldOpenInNewTab = (index, shouldOpenInNewTab) => ({
+  type: actions.SET_LINK_SHOULD_OPEN_IN_NEW_TAB,
+  index: index,
+  shouldOpenInNewTab: shouldOpenInNewTab
+})

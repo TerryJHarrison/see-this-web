@@ -1,4 +1,4 @@
-import {Form, Grid, GridColumn, GridRow, Segment} from "semantic-ui-react";
+import {Form, Grid, GridColumn, GridRow, Label, Segment} from "semantic-ui-react";
 import {connect} from "react-redux";
 import {setSubheading} from "../../store/actions/links";
 import {useControlledFormInput} from "../../hooks/useControlledFormState";
@@ -13,7 +13,7 @@ const EditSubheading = ({currentSubheading, setSubheading}) => {
           <Grid>
             <GridRow columns={1}>
               <GridColumn>
-                <label>Subheading</label>
+                <Label attached="top left" ribbon>Subheading</Label>
                 <Form.Input placeholder='Short Description' name='text' value={subheading} onChange={handleSubheadingChange}/>
               </GridColumn>
             </GridRow>
