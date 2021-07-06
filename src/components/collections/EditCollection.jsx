@@ -40,7 +40,7 @@ const EditCollection = ({collection, getLinkCollection, addEmptyLinkToActiveColl
         <EditLink key={l.index} link={l}/>
         )}
         <Grid>
-          <GridRow columns={5}>
+          <GridRow columns={6}>
             <GridColumn><Button type='submit' color="green" onClick={handleSave}>Save</Button></GridColumn>
             <GridColumn width={1}/>
             <GridColumn/>
@@ -48,6 +48,7 @@ const EditCollection = ({collection, getLinkCollection, addEmptyLinkToActiveColl
             <GridColumn width={1}>
               <Popup content='Add new link' trigger={<Button onClick={addEmptyLinkToActiveCollection} icon="plus"/>}/>
             </GridColumn>
+            <GridColumn width={2}/>
           </GridRow>
         </Grid>
         <Segment basic/>

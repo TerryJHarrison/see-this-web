@@ -1,5 +1,5 @@
 import React, {Fragment} from "react";
-import {Header, Segment, SegmentGroup, Icon} from "semantic-ui-react";
+import {Header, Segment, SegmentGroup, Icon, Button} from "semantic-ui-react";
 import {connect} from "react-redux";
 
 const LinkCollectionPreview = ({collection}) => {
@@ -13,11 +13,21 @@ const LinkCollectionPreview = ({collection}) => {
           <Header as="h1">{heading}</Header>
           <Header as="h3">{subheading}</Header>
           <SegmentGroup raised>
-            {links.map(l => <Segment key={l.index} color={l.color} inverted={l.inverted}>
-              {l.shouldOpenInNewTab && <a href={l.redirectUrl} target="_blank" rel="noopener noreferrer">{l.text}</a>}
-              {!l.shouldOpenInNewTab && <a href={l.redirectUrl}>{l.text}</a>}&nbsp;
-              {l.icon && <Icon name={l.icon}/>}
-            </Segment>)}
+            {links.map(l => {
+              const handleSameTabLinkClick = async () => {
+                window.location = l.redirectUrl;
+              };
+              const handleNewTabLinkClick = async () => {
+                window.open(l.redirectUrl, "_blank", "noopener noreferrer");
+              };
+              return (
+                <Segment key={l.index} color={l.color} inverted={l.inverted}>
+                  {l.shouldOpenInNewTab && <Button onClick={handleNewTabLinkClick}>{l.text}</Button>}
+                  {!l.shouldOpenInNewTab && <Button onClick={handleSameTabLinkClick}>{l.text}</Button>}&nbsp;
+                  {l.icon && <Icon name={l.icon}/>}
+                </Segment>
+              );
+            })}
           </SegmentGroup>
         </Segment>
       </Fragment>
@@ -26,6 +36,6 @@ const LinkCollectionPreview = ({collection}) => {
 
 const mapStateToProps = state => ({
   collection: state.links.activeCollection
-})
+});
 
 export default connect(mapStateToProps)(LinkCollectionPreview);

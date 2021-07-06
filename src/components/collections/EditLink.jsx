@@ -12,7 +12,7 @@ const iconOptions = [
 ]
 
 const EditLink = ({link, removeLinkFromActiveCollection, setLinkText, setLinkRedirectUrl, setLinkShouldOpenInNewTab, setLinkIcon}) => {
-  const {index} = link;
+  const {index, clickCount} = link;
   const [text, setText] = useState(link.text);
   const [redirectUrl, setRedirectUrl] = useState(link.redirectUrl);
   const [shouldOpenInNewTab, setShouldOpenInNewTab] = useState(link.shouldOpenInNewTab);
@@ -48,7 +48,7 @@ const EditLink = ({link, removeLinkFromActiveCollection, setLinkText, setLinkRed
       <Form>
         <Form.Field>
           <Grid>
-            <GridRow columns={5}>
+            <GridRow columns={6}>
               <GridColumn>
                 <Label attached="top left" ribbon size="small">Link Text</Label>
                 <Form.Input placeholder='SeeTh.is - Link Collections and Shortening' name='text' size="small" value={text} onChange={handleTextChange}/>
@@ -76,6 +76,9 @@ const EditLink = ({link, removeLinkFromActiveCollection, setLinkText, setLinkRed
                     <Button color='red' onClick={handleDeleteClick}>Delete</Button>
                   </Modal.Actions>
                 </Modal>
+              </GridColumn>
+              <GridColumn width={2} verticalAlign="bottom">
+                {clickCount && <Label>Clicks: {clickCount}</Label>}
               </GridColumn>
             </GridRow>
           </Grid>

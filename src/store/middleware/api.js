@@ -16,6 +16,10 @@ async function apiPost(apiPath, body = {}){
   return await axios.post(`https://api.seeth.is/${apiPath}`, body);
 }
 
+async function apiPatch(apiPath, body = {}){
+  return await axios.patch(`https://api.seeth.is/${apiPath}`, body);
+}
+
 async function userApiGet(apiPath){
   const session = await sessionService.loadSession();
   return await axios.get(`https://api.seeth.is/${apiPath}`, {headers: {'Authorization': session.token}})
@@ -45,12 +49,9 @@ const api = store => next => async action => {
         redirectUrl: action.url
       };
       try {
-        let response;
-        if (data.session.authenticated) {
-          response = await userApiPut('links', body)
-        } else {
-          response = await apiPost('links', body);
-        }
+        let response = data.session.authenticated ?
+          await userApiPut('links', body) :
+          await apiPost('links', body);
 
         store.dispatch(addCreatedLink(response.data.link, action.url));
         store.dispatch(addSuccessToast('Short link created', `Use it now: seeth.is/l/${response.data.link}`, 10000));
@@ -61,8 +62,7 @@ const api = store => next => async action => {
           store.dispatch(addFailureToast('Uh-oh!', 'Could not create short link, please try again in a few minutes.'));
         }
       }
-      break;
-    }
+    } break;
     case actions.UPDATE_SHORT_LINK:
       try {
         await userApiPatch('links', {
@@ -119,8 +119,7 @@ const api = store => next => async action => {
           store.dispatch(addFailureToast('Uh-oh!', 'Could not create short link, please try again in a few minutes.'));
         }
       }
-      break;
-    }
+    } break;
     case actions.UPDATE_SHORT_LINK_COLLECTION:
       const data = store.getState();
       const {links: {activeCollection}} = data;
@@ -146,6 +145,9 @@ const api = store => next => async action => {
       const response = await userApiGet(`collections/${action.id}`);
       store.dispatch(setLinkCollection(response["data"]));
     } break;
+    case actions.RECORD_LINK_CLICK:
+      apiPatch(`collections/${action.collectionId}/link/${action.linkIndex}`).then();
+      break;
     case actions.CLOSE_ACCOUNT:
       await userApiDelete('accounts');
       break;

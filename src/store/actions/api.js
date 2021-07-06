@@ -81,3 +81,9 @@ export const removeLinkFromActiveCollection = linkIndex => ({
   type: actions.REMOVE_LINK_FROM_ACTIVE_COLLECTION,
   linkIndex: linkIndex
 });
+
+export const recordLinkClick = (collectionId, linkIndex) => ({
+  type: actions.RECORD_LINK_CLICK,
+  linkIndex: linkIndex,
+  collectionId: collectionId
+});
