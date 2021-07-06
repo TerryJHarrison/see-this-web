@@ -40,10 +40,11 @@ const EditCollection = ({collection, getLinkCollection, addEmptyLinkToActiveColl
         <EditLink key={l.index} link={l}/>
         )}
         <Grid>
-          <GridRow columns={4}>
+          <GridRow columns={5}>
             <GridColumn><Button type='submit' color="green" onClick={handleSave}>Save</Button></GridColumn>
             <GridColumn width={1}/>
             <GridColumn/>
+            <GridColumn width={2}/>
             <GridColumn width={1}>
               <Popup content='Add new link' trigger={<Button onClick={addEmptyLinkToActiveCollection} icon="plus"/>}/>
             </GridColumn>
@@ -54,7 +55,7 @@ const EditCollection = ({collection, getLinkCollection, addEmptyLinkToActiveColl
       </Segment>}
     </Segment>
   );
-}
+};
 
 const mapStateToProps = state => ({
   collection: state.links.activeCollection

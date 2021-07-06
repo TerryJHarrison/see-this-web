@@ -1,5 +1,5 @@
 import React, {Fragment} from "react";
-import {Header, Segment, SegmentGroup} from "semantic-ui-react";
+import {Header, Segment, SegmentGroup, Icon} from "semantic-ui-react";
 import {connect} from "react-redux";
 
 const LinkCollectionPreview = ({collection}) => {
@@ -15,7 +15,8 @@ const LinkCollectionPreview = ({collection}) => {
           <SegmentGroup raised>
             {links.map(l => <Segment key={l.index} color={l.color} inverted={l.inverted}>
               {l.shouldOpenInNewTab && <a href={l.redirectUrl} target="_blank" rel="noopener noreferrer">{l.text}</a>}
-              {!l.shouldOpenInNewTab && <a href={l.redirectUrl}>{l.text}</a>}
+              {!l.shouldOpenInNewTab && <a href={l.redirectUrl}>{l.text}</a>}&nbsp;
+              {l.icon && <Icon name={l.icon}/>}
             </Segment>)}
           </SegmentGroup>
         </Segment>

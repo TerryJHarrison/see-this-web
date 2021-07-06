@@ -1,5 +1,5 @@
 import React, {useEffect, useState, Fragment} from "react";
-import {Dimmer, Header, Loader, Segment, SegmentGroup} from "semantic-ui-react";
+import {Dimmer, Header, Icon, Loader, Segment, SegmentGroup} from "semantic-ui-react";
 import {getLinkCollection} from "../store/actions/api";
 import {connect} from "react-redux";
 
@@ -32,7 +32,8 @@ const LinkCollection = ({getLinkCollection, collection}) => {
           <SegmentGroup raised>
             {links.map(l => <Segment color={l.color} inverted={l.inverted}>
               {l.shouldOpenInNewTab && <a href={l.redirectUrl} target="_blank" rel="noopener noreferrer">{l.text}</a>}
-              {!l.shouldOpenInNewTab && <a href={l.redirectUrl}>{l.text}</a>}
+              {!l.shouldOpenInNewTab && <a href={l.redirectUrl}>{l.text}</a>}&nbsp;
+              {l.icon && <Icon name={l.icon}/>}
             </Segment>)}
           </SegmentGroup>
         </Segment>

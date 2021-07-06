@@ -1,4 +1,5 @@
 import * as actions from '../actions';
+import {SET_LINK_ICON} from "../actions";
 
 export const addCreatedLink = (link, redirectUrl) => ({
   type: actions.ADD_CREATED_LINK,
@@ -55,4 +56,10 @@ export const setLinkShouldOpenInNewTab = (index, shouldOpenInNewTab) => ({
   type: actions.SET_LINK_SHOULD_OPEN_IN_NEW_TAB,
   index: index,
   shouldOpenInNewTab: shouldOpenInNewTab
-})
+});
+
+export const setLinkIcon = (index, icon) => ({
+  type: actions.SET_LINK_ICON,
+  index: index,
+  icon: icon
+});

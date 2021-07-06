@@ -56,6 +56,17 @@ function links(state = {}, action) {
         })
       });
     }
+    case actions.SET_LINK_ICON: {
+      const links = state.activeCollection.links;
+      const link = links[action.index];
+      link.icon = action.icon;
+      links[action.index] = link;
+      return Object.assign([], state, {
+        activeCollection: Object.assign({}, state.activeCollection, {
+          links: links
+        })
+      });
+    }
     case actions.ADD_EMPTY_LINK_TO_ACTIVE_COLLECTION:
       return Object.assign([], state, {
         activeCollection: Object.assign({}, state.activeCollection, {
