@@ -2,12 +2,14 @@ import React, {useEffect, useState, Fragment} from "react";
 import {Button, Dimmer, Header, Icon, Loader, Segment, SegmentGroup} from "semantic-ui-react";
 import {getLinkCollection, recordLinkClick} from "../store/actions/api";
 import {connect} from "react-redux";
+import {useParams} from "react-router-dom";
 
 const LinkCollection = ({getLinkCollection, collection, recordLinkClick}) => {
   const [isLoaded, setLoaded] = useState(false);
+  const {id} = useParams();
 
   useEffect(() => {
-    getLinkCollection().then(() => {
+    getLinkCollection(id).then(() => {
       setLoaded(true);
     });
   });
@@ -22,7 +24,7 @@ const LinkCollection = ({getLinkCollection, collection, recordLinkClick}) => {
     );
   }
 
-  const {id, heading, links, subheading} = collection;
+  const {heading, links, subheading} = collection;
   return (
       <Fragment>
         <Segment basic/>

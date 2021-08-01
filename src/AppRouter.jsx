@@ -42,7 +42,7 @@ const AppRouter = ({checked}) => {
           <PrivateRoute path="/profile/collections/:id" component={EditLinkCollection}/>
           <PrivateRoute path="/profile" exact component={Profile}/>
           <PrivateRoute path="/profile/close" exact component={ConfirmCloseAccount}/>
-          <PublicRoute path="/portfolio" component={LinkCollection} Layout={CollectionLayout}/>
+          <PublicRoute path="/portfolio/:id" component={LinkCollection} Layout={CollectionLayout}/>
         </Switch>
         }
       <ToastDisplay key="toasts-display"/>
