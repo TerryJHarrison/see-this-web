@@ -23,6 +23,8 @@ import LinkCollection from "./pages/LinkCollection";
 import PublicRoute from "./components/authentication/PublicRoute";
 import CollectionLayout from "./components/layouts/CollectionLayout";
 import EditLinkCollection from "./components/collections/EditCollection";
+import PreviewCollectionLayout from "./components/layouts/PreviewCollectionLayout";
+import LinkCollectionPreview from "./components/LinkCollectionPreview";
 
 const AppRouter = ({checked}) => {
   return (
@@ -39,6 +41,7 @@ const AppRouter = ({checked}) => {
           <PublicRoute path="/authorize/register" component={RegisterCallback}/>
           <PublicRoute path="/authorize/login" component={LoginCallback}/>
           <PublicRoute path="/authorize/logout" component={LogoutCallback}/>
+          <PublicRoute path="/collections/preview" component={LinkCollectionPreview} Layout={PreviewCollectionLayout}/>
           <PrivateRoute path="/profile/collections/:id" component={EditLinkCollection}/>
           <PrivateRoute path="/profile" exact component={Profile}/>
           <PrivateRoute path="/profile/close" exact component={ConfirmCloseAccount}/>

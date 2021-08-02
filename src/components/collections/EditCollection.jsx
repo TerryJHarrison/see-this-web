@@ -1,14 +1,14 @@
 import {
   Button,
   Dimmer, Grid, GridColumn, GridRow,
-  Header,
+  Header, Icon,
   Loader, Popup,
   Segment
 } from "semantic-ui-react";
 import {connect} from "react-redux";
 import {getLinkCollection, updateShortLinkCollection, addEmptyLinkToActiveCollection} from "../../store/actions/api";
-import {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {NavLink, useParams} from "react-router-dom";
 import EditLink from "./EditLink";
 import LinkCollectionPreview from "../LinkCollectionPreview";
 import EditHeading from "./EditHeading";
@@ -52,6 +52,8 @@ const EditCollection = ({collection, getLinkCollection, addEmptyLinkToActiveColl
           </GridRow>
         </Grid>
         <Segment basic/>
+        <Header as='h2'>Preview </Header>
+        <NavLink to="/collections/preview"><Icon name="desktop"/>See on Desktop</NavLink>
         <LinkCollectionPreview/>
       </Segment>}
     </Segment>

@@ -7,7 +7,6 @@ function links(state = {}, action) {
         owned: action.links['links']
       });
     case actions.SET_OWNED_LINK_COLLECTIONS:
-      console.info(action);
       return Object.assign({}, state, {
         collections: action.collections['collections']
       });
