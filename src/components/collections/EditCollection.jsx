@@ -15,6 +15,7 @@ import EditHeading from "./EditHeading";
 import EditSubheading from "./EditSubheading";
 import SanityMobilePreview from 'sanity-mobile-preview'
 import 'sanity-mobile-preview/dist/index.css?raw'
+import QRCode from 'qrcode.react';
 
 const EditCollection = ({collection, getLinkCollection, addEmptyLinkToActiveCollection, updateShortLinkCollection}) => {
   const [isLoaded, setLoaded] = useState(false);
@@ -54,6 +55,8 @@ const EditCollection = ({collection, getLinkCollection, addEmptyLinkToActiveColl
           </GridRow>
         </Grid>
         <Segment basic/>
+        <Header as='h2'>Collection QR Code</Header>
+        <QRCode value={`https://seeth.is/profile/${collection.id}`} imageSettings={{src:"/logo192.png", width:25, height:25}}/>
         <Header as='h2'>Preview </Header>
         <NavLink to="/collections/preview"><Icon name="desktop"/>See on Desktop</NavLink>
         <SanityMobilePreview>
