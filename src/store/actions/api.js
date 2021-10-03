@@ -92,18 +92,28 @@ export const setSubheaderTextColor = color => ({
   color: color
 });
 
+export const setHeaderTextSize = size => ({
+  type: actions.SET_COLLECTION_HEADER_TEXT_SIZE,
+  size: size
+});
+
+export const setSubheaderTextSize = size => ({
+  type: actions.SET_COLLECTION_SUBHEADER_TEXT_SIZE,
+  size: size
+});
+
 export const recordLinkClick = (collectionId, linkIndex) => ({
   type: actions.RECORD_LINK_CLICK,
   linkIndex: linkIndex,
   collectionId: collectionId
 });
 
-export const setCollectionHeaderLocation = align => ({
+export const setCollectionHeaderAlign = align => ({
   type: actions.SET_COLLECTION_HEADER_LOCATION,
   align: align
 });
 
-export const setCollectionSubheaderLocation = align => ({
+export const setCollectionSubheaderAlign = align => ({
   type: actions.SET_COLLECTION_SUBHEADER_LOCATION,
   align: align
 });

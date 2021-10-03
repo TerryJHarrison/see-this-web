@@ -174,6 +174,18 @@ function links(state = {}, action) {
           subheaderTextColor: action.color
         })
       });
+    case actions.SET_COLLECTION_HEADER_TEXT_SIZE:
+      return Object.assign([], state, {
+        activeCollection: Object.assign({}, state.activeCollection, {
+          headerTextSize: action.size
+        })
+      });
+    case actions.SET_COLLECTION_SUBHEADER_TEXT_SIZE:
+      return Object.assign([], state, {
+        activeCollection: Object.assign({}, state.activeCollection, {
+          subheaderTextSize: action.size
+        })
+      });
     case actions.REMOVE_OWNED_LINK:
       return Object.assign({}, state, {
         owned: state.owned.filter(l => l.link !== action.link)

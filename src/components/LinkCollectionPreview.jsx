@@ -44,11 +44,13 @@ const LinkContents = ({id, handleLinkClick, buttonColor, buttonHoverColor, iconL
 const LinkCollectionPreview = ({collection}) => {
 
   const {id, heading, links, subheading, page} = collection;
-  let {headerAlign, subheaderAlign, headerTextColor, subheaderTextColor} = collection;
+  let {headerAlign, subheaderAlign, headerTextColor, subheaderTextColor, headerTextSize, subheaderTextSize} = collection;
   const {buttonColor, buttonHoverColor, blockColor, iconColor, textColor, textHoverColor, backgroundColor} = page || {};
 
   if(!headerAlign){headerAlign = "center"}
   if(!subheaderAlign){subheaderAlign = "center"}
+  if(!headerTextSize){headerTextSize = "h1"}
+  if(!subheaderTextSize){subheaderTextSize = "h3"}
 
   if(!id){return <Redirect to="/collections"/>}
   if(!links){return <Loader/>}
@@ -57,8 +59,8 @@ const LinkCollectionPreview = ({collection}) => {
       <Fragment>
         <Segment basic/>
         <Segment textAlign="center" color={backgroundColor} inverted={backgroundColor}>
-          <Header as="h1" textAlign={headerAlign} color={headerTextColor}>{heading}</Header>
-          <Header as="h3" textAlign={subheaderAlign} color={subheaderTextColor}>{subheading}</Header>
+          <Header as={headerTextSize} textAlign={headerAlign} color={headerTextColor}>{heading}</Header>
+          <Header as={subheaderTextSize} textAlign={subheaderAlign} color={subheaderTextColor}>{subheading}</Header>
           <SegmentGroup raised>
             {links.map(l => {
               const handleSameTabLinkClick = async () => {

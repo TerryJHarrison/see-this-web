@@ -10,7 +10,12 @@ import {
   getLinkCollection,
   updateShortLinkCollection,
   addEmptyLinkToActiveCollection,
-  setCollectionHeaderLocation, setCollectionSubheaderLocation, setHeaderTextColor, setSubheaderTextColor
+  setCollectionHeaderAlign,
+  setCollectionSubheaderAlign,
+  setHeaderTextColor,
+  setSubheaderTextColor,
+  setHeaderTextSize,
+  setSubheaderTextSize
 } from "../../store/actions/api";
 import React, {useEffect, useState} from "react";
 import {NavLink, useParams} from "react-router-dom";
@@ -32,7 +37,15 @@ const headerLocationOptions = [
   {key: 'left', value: 'left', text: 'Left'},
   {key: 'right', value: 'right', text: 'Right'},
   {key: 'center', value: 'center', text: 'Center'}
-]
+];
+
+const headerSizeOptions = [
+  {key: 'h1', value: 'h1', text: 'H1'},
+  {key: 'h2', value: 'h2', text: 'H2'},
+  {key: 'h3', value: 'h3', text: 'H3'},
+  {key: 'h4', value: 'h4', text: 'H4'},
+  {key: 'h5', value: 'h5', text: 'H5'}
+];
 
 const EditCollection = ({collection,
                           getLinkCollection,
@@ -41,13 +54,17 @@ const EditCollection = ({collection,
                           setCollectionHeaderAlign,
                           setCollectionSubheaderAlign,
                           setHeaderTextColor,
-                          setSubheaderTextColor
+                          setSubheaderTextColor,
+                          setHeaderTextSize,
+                          setSubheaderTextSize
 }) => {
   const [isLoaded, setLoaded] = useState(false);
   const [headerAlign, setHeaderAlign] = useState(collection.headerAlign || "center");
   const [subheaderAlign, setSubheaderAlign] = useState(collection.subheaderAlign || "center");
   const [headerTextColor, handleHeaderTextColor] = useControlledFormInput(collection.headerTextColor, setHeaderTextColor);
   const [subheaderTextColor, handleSubheaderTextColor] = useControlledFormInput(collection.subheaderTextColor, setSubheaderTextColor);
+  const [headerTextSize, handleHeaderTextSize] = useControlledFormInput(collection.headerTextSize, setHeaderTextSize);
+  const [subheaderTextSize, handleSubheaderTextSize] = useControlledFormInput(collection.subheaderTextSize, setSubheaderTextSize);
   const {id} = useParams();
 
   useEffect(() => {
@@ -76,14 +93,28 @@ const EditCollection = ({collection,
       {!isLoaded && <Dimmer><Loader/></Dimmer>}
       {isLoaded && <Segment basic>
         <EditHeading currentHeading={collection.heading}/>
-        <Dropdown placeholder='Alignment' fluid search selection options={headerLocationOptions} value={headerAlign} onChange={handleHeaderAlignChange}/>
+        <Dropdown placeholder='Alignment' fluid search selection
+                  options={headerLocationOptions}
+                  value={headerAlign}
+                  onChange={handleHeaderAlignChange}/>
+        <Dropdown placeholder='Size' fluid search selection
+                  options={headerSizeOptions}
+                  value={headerTextSize}
+                  onChange={handleHeaderTextSize}/>
         <Dropdown
           text='Header Color' floating labeled button className='icon'
           defaultValue={headerTextColor}
           options={colorOptions['colors']}
           onChange={handleHeaderTextColor}/>
         <EditSubheading currentSubheading={collection.subheading}/>
-        <Dropdown placeholder='Alignment' fluid search selection options={headerLocationOptions} value={subheaderAlign} onChange={handleSubheaderAlignChange}/>
+        <Dropdown placeholder='Alignment' fluid search selection
+                  options={headerLocationOptions}
+                  value={subheaderAlign}
+                  onChange={handleSubheaderAlignChange}/>
+        <Dropdown placeholder='Size' fluid search selection
+                  options={headerSizeOptions}
+                  value={subheaderTextSize}
+                  onChange={handleSubheaderTextSize}/>
         <Dropdown
           text='Header Color' floating labeled button className='icon'
           defaultValue={subheaderTextColor}
@@ -134,10 +165,12 @@ const actionCreators = {
   updateShortLinkCollection,
   getLinkCollection,
   addEmptyLinkToActiveCollection,
-  setCollectionHeaderLocation,
-  setCollectionSubheaderLocation,
+  setCollectionHeaderAlign,
+  setCollectionSubheaderAlign,
   setHeaderTextColor,
-  setSubheaderTextColor
+  setSubheaderTextColor,
+  setHeaderTextSize,
+  setSubheaderTextSize
 };
 
 export default connect(mapStateToProps, actionCreators)(EditCollection);
