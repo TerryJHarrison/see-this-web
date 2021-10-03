@@ -22,6 +22,54 @@ function links(state = {}, action) {
       return Object.assign({}, state, {
         activeCollection: Object.assign({}, state.activeCollection, {subheading: action.subheading})
       });
+    case actions.SET_BUTTON_COLOR:
+      return Object.assign({}, state, {
+        activeCollection: Object.assign({}, state.activeCollection, {
+          page: Object.assign({}, state.activeCollection.page, {
+            buttonColor: action.color
+          })
+        })
+      });
+    case actions.SET_BUTTON_HOVER_COLOR:
+      return Object.assign({}, state, {
+        activeCollection: Object.assign({}, state.activeCollection, {
+          page: Object.assign({}, state.activeCollection.page, {
+            buttonHoverColor: action.color
+          })
+        })
+      });
+    case actions.SET_TEXT_HOVER_COLOR:
+      return Object.assign({}, state, {
+        activeCollection: Object.assign({}, state.activeCollection, {
+          page: Object.assign({}, state.activeCollection.page, {
+            textHoverColor: action.color
+          })
+        })
+      });
+    case actions.SET_BLOCK_COLOR:
+      return Object.assign({}, state, {
+        activeCollection: Object.assign({}, state.activeCollection, {
+          page: Object.assign({}, state.activeCollection.page, {
+            blockColor: action.color
+          })
+        })
+      });
+    case actions.SET_BACKGROUND_COLOR:
+      return Object.assign({}, state, {
+        activeCollection: Object.assign({}, state.activeCollection, {
+          page: Object.assign({}, state.activeCollection.page, {
+            backgroundColor: action.color
+          })
+        })
+      });
+    case actions.SET_BUTTON_TEXT_COLOR:
+      return Object.assign({}, state, {
+        activeCollection: Object.assign({}, state.activeCollection, {
+          page: Object.assign({}, state.activeCollection.page, {
+            textColor: action.color
+          })
+        })
+      });
     case actions.SET_LINK_TEXT: {
       const links = state.activeCollection.links;
       const link = links[action.index];
@@ -66,6 +114,28 @@ function links(state = {}, action) {
         })
       });
     }
+    case actions.SET_LINK_ICON_SIZE: {
+      const links = state.activeCollection.links;
+      const link = links[action.index];
+      link.iconSize = action.iconSize;
+      links[action.index] = link;
+      return Object.assign([], state, {
+        activeCollection: Object.assign({}, state.activeCollection, {
+          links: links
+        })
+      });
+    }
+    case actions.SET_LINK_ICON_LOCATION: {
+      const links = state.activeCollection.links;
+      const link = links[action.index];
+      link.iconLocation = action.iconLocation;
+      links[action.index] = link;
+      return Object.assign([], state, {
+        activeCollection: Object.assign({}, state.activeCollection, {
+          links: links
+        })
+      });
+    }
     case actions.ADD_EMPTY_LINK_TO_ACTIVE_COLLECTION:
       return Object.assign([], state, {
         activeCollection: Object.assign({}, state.activeCollection, {
@@ -78,6 +148,18 @@ function links(state = {}, action) {
           links: state.activeCollection.links.filter(l => l.index !== action.linkIndex).map(l => {
             return l.index < action.linkIndex ? l : Object.assign({}, l, {index: (l.index - 1).toString()})
           })
+        })
+      });
+    case actions.SET_COLLECTION_HEADER_LOCATION:
+      return Object.assign([], state, {
+        activeCollection: Object.assign({}, state.activeCollection, {
+          headerAlign: action.align
+        })
+      });
+    case actions.SET_COLLECTION_SUBHEADER_LOCATION:
+      return Object.assign([], state, {
+        activeCollection: Object.assign({}, state.activeCollection, {
+          subheaderAlign: action.align
         })
       });
     case actions.REMOVE_OWNED_LINK:

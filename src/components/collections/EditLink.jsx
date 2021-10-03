@@ -2,7 +2,13 @@ import {Button, Dropdown, Form, Grid, GridColumn, GridRow, Icon, Label, Modal, P
 import {connect} from "react-redux";
 import {removeLinkFromActiveCollection} from "../../store/actions/api";
 import React, {useState} from "react";
-import {setLinkText, setLinkRedirectUrl, setLinkShouldOpenInNewTab, setLinkIcon} from "../../store/actions/links";
+import {
+  setLinkText,
+  setLinkRedirectUrl,
+  setLinkShouldOpenInNewTab,
+  setLinkIcon,
+  setLinkIconSize, setLinkIconLocation
+} from "../../store/actions/links";
 import {useFormModal} from "../../hooks/useFormModal";
 
 const iconOptions = [
@@ -11,12 +17,25 @@ const iconOptions = [
   {key: 'braille', icon: 'braille', value: 'braille'},
 ]
 
-const EditLink = ({link, removeLinkFromActiveCollection, setLinkText, setLinkRedirectUrl, setLinkShouldOpenInNewTab, setLinkIcon}) => {
+const iconSizeOptions = [
+  {key: 'small', value: 'small', text: 'Small'},
+  {key: 'medium', value: 'large', text: 'Medium'},
+  {key: 'large', value: 'big', text: 'Large'},
+]
+
+const iconLocationOptions = [
+  {key: 'after', value: 'right', text: 'After link'},
+  {key: 'before', value: 'left', text: 'Before link'},
+]
+
+const EditLink = ({link, removeLinkFromActiveCollection, setLinkText, setLinkRedirectUrl, setLinkShouldOpenInNewTab, setLinkIcon, setLinkIconSize, setLinkIconLocation}) => {
   const {index, clickCount} = link;
   const [text, setText] = useState(link.text);
   const [redirectUrl, setRedirectUrl] = useState(link.redirectUrl);
   const [shouldOpenInNewTab, setShouldOpenInNewTab] = useState(link.shouldOpenInNewTab);
   const [icon, setIcon] = useState(link.icon);
+  const [iconSize, setIconSize] = useState(link.iconSize);
+  const [iconLocation, setIconLocation] = useState(link.iconLocation);
   const [isOpen, open, close] = useFormModal();
 
   const handleTextChange = (e, {value}) => {
@@ -32,6 +51,16 @@ const EditLink = ({link, removeLinkFromActiveCollection, setLinkText, setLinkRed
   const handleIconChange = (e, {value}) => {
     setIcon(value);
     setLinkIcon(index, value);
+  };
+
+  const handleIconSizeChange = (e, {value}) => {
+    setIconSize(value);
+    setLinkIconSize(index, value);
+  };
+
+  const handleIconLocationChange = (e, {value}) => {
+    setIconLocation(value);
+    setLinkIconLocation(index, value);
   };
 
   const handleDeleteClick = () => {
@@ -63,6 +92,8 @@ const EditLink = ({link, removeLinkFromActiveCollection, setLinkText, setLinkRed
               </GridColumn>
               <GridColumn width={2} verticalAlign="bottom">
                 <Dropdown placeholder='Icon' fluid search selection options={iconOptions} icon={icon} onChange={handleIconChange}/>
+                <Dropdown placeholder='Size' fluid search selection options={iconSizeOptions} value={iconSize} onChange={handleIconSizeChange}/>
+                <Dropdown placeholder='After link' fluid search selection options={iconLocationOptions} value={iconLocation || "right"} onChange={handleIconLocationChange}/>
               </GridColumn>
               <GridColumn width={1} verticalAlign="bottom">
                 <Modal onOpen={open} onClose={close} open={isOpen}
@@ -93,7 +124,9 @@ const actionCreators = {
   setLinkText,
   setLinkRedirectUrl,
   setLinkShouldOpenInNewTab,
-  setLinkIcon
+  setLinkIcon,
+  setLinkIconSize,
+  setLinkIconLocation
 }
 
 export default connect(null, actionCreators)(EditLink);

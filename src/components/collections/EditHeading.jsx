@@ -1,7 +1,8 @@
-import {Form, Grid, GridColumn, GridRow, Label, Segment} from "semantic-ui-react";
+import {Dropdown, Form, Grid, GridColumn, GridRow, Label, Segment} from "semantic-ui-react";
 import {connect} from "react-redux";
 import {setHeading} from "../../store/actions/links";
 import {useControlledFormInput} from "../../hooks/useControlledFormState";
+import React from "react";
 
 const EditHeading = ({currentHeading, setHeading}) => {
   const [heading, handleHeadingChange] = useControlledFormInput(currentHeading, setHeading);
@@ -24,12 +25,8 @@ const EditHeading = ({currentHeading, setHeading}) => {
   );
 }
 
-const mapStateToProps = state => ({
-  collection: state.links.activeCollection
-});
-
 const actionCreators = {
   setHeading
 };
 
-export default connect(mapStateToProps, actionCreators)(EditHeading);
+export default connect(null, actionCreators)(EditHeading);

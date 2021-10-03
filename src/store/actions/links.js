@@ -19,6 +19,36 @@ export const setOwnedLinkCollections = collections => ({
   }
 });
 
+export const setButtonColor = color => ({
+  type: actions.SET_BUTTON_COLOR,
+  color: color
+});
+
+export const setButtonHoverColor = color => ({
+  type: actions.SET_BUTTON_HOVER_COLOR,
+  color: color
+});
+
+export const setTextHoverColor = color => ({
+  type: actions.SET_TEXT_HOVER_COLOR,
+  color: color
+});
+
+export const setBlockColor = color => ({
+  type: actions.SET_BLOCK_COLOR,
+  color: color
+});
+
+export const setBackgroundColor = color => ({
+  type: actions.SET_BACKGROUND_COLOR,
+  color: color
+});
+
+export const setButtonTextColor = color => ({
+  type: actions.SET_BUTTON_TEXT_COLOR,
+  color: color
+});
+
 export const removeOwnedLink = link => ({
   type: actions.REMOVE_OWNED_LINK,
   link: link
@@ -61,4 +91,16 @@ export const setLinkIcon = (index, icon) => ({
   type: actions.SET_LINK_ICON,
   index: index,
   icon: icon
+});
+
+export const setLinkIconSize = (index, iconSize) => ({
+  type: actions.SET_LINK_ICON_SIZE,
+  index: index,
+  iconSize: iconSize
+});
+
+export const setLinkIconLocation = (index, iconLocation) => ({
+  type: actions.SET_LINK_ICON_LOCATION,
+  index: index,
+  iconLocation: iconLocation
 });

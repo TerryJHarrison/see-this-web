@@ -87,3 +87,13 @@ export const recordLinkClick = (collectionId, linkIndex) => ({
   linkIndex: linkIndex,
   collectionId: collectionId
 });
+
+export const setCollectionHeaderLocation = align => ({
+  type: actions.SET_COLLECTION_HEADER_LOCATION,
+  align: align
+});
+
+export const setCollectionSubheaderLocation = align => ({
+  type: actions.SET_COLLECTION_SUBHEADER_LOCATION,
+  align: align
+});
