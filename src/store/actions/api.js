@@ -82,6 +82,16 @@ export const removeLinkFromActiveCollection = linkIndex => ({
   linkIndex: linkIndex
 });
 
+export const setHeaderTextColor = color => ({
+  type: actions.SET_COLLECTION_HEADER_TEXT_COLOR,
+  color: color
+});
+
+export const setSubheaderTextColor = color => ({
+  type: actions.SET_COLLECTION_SUBHEADER_TEXT_COLOR,
+  color: color
+});
+
 export const recordLinkClick = (collectionId, linkIndex) => ({
   type: actions.RECORD_LINK_CLICK,
   linkIndex: linkIndex,

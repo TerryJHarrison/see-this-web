@@ -44,7 +44,7 @@ const LinkContents = ({id, handleLinkClick, buttonColor, buttonHoverColor, iconL
 const LinkCollectionPreview = ({collection}) => {
 
   const {id, heading, links, subheading, page} = collection;
-  let {headerAlign, subheaderAlign} = collection;
+  let {headerAlign, subheaderAlign, headerTextColor, subheaderTextColor} = collection;
   const {buttonColor, buttonHoverColor, blockColor, iconColor, textColor, textHoverColor, backgroundColor} = page || {};
 
   if(!headerAlign){headerAlign = "center"}
@@ -57,8 +57,8 @@ const LinkCollectionPreview = ({collection}) => {
       <Fragment>
         <Segment basic/>
         <Segment textAlign="center" color={backgroundColor} inverted={backgroundColor}>
-          <Header as="h1" textAlign={headerAlign}>{heading}</Header>
-          <Header as="h3" textAlign={subheaderAlign}>{subheading}</Header>
+          <Header as="h1" textAlign={headerAlign} color={headerTextColor}>{heading}</Header>
+          <Header as="h3" textAlign={subheaderAlign} color={subheaderTextColor}>{subheading}</Header>
           <SegmentGroup raised>
             {links.map(l => {
               const handleSameTabLinkClick = async () => {

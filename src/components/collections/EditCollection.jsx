@@ -10,7 +10,7 @@ import {
   getLinkCollection,
   updateShortLinkCollection,
   addEmptyLinkToActiveCollection,
-  setCollectionHeaderLocation, setCollectionSubheaderLocation
+  setCollectionHeaderLocation, setCollectionSubheaderLocation, setHeaderTextColor, setSubheaderTextColor
 } from "../../store/actions/api";
 import React, {useEffect, useState} from "react";
 import {NavLink, useParams} from "react-router-dom";
@@ -25,6 +25,8 @@ import EditButtonTextColor from "./EditButtonTextColor";
 import EditBackgroundColor from "./EditBackgroundColor";
 import EditBlockColor from "./EditBlockColor";
 import EditButtonTextHoverColor from "./EditButtonTextHoverColor";
+import colorOptions from "./colorOptions.json"
+import {useControlledFormInput} from "../../hooks/useControlledFormState";
 
 const headerLocationOptions = [
   {key: 'left', value: 'left', text: 'Left'},
@@ -36,12 +38,16 @@ const EditCollection = ({collection,
                           getLinkCollection,
                           addEmptyLinkToActiveCollection,
                           updateShortLinkCollection,
-                          setCollectionHeaderLocation: setCollectionHeaderAlign,
-                          setCollectionSubheaderLocation: setCollectionSubheaderAlign
+                          setCollectionHeaderAlign,
+                          setCollectionSubheaderAlign,
+                          setHeaderTextColor,
+                          setSubheaderTextColor
 }) => {
   const [isLoaded, setLoaded] = useState(false);
   const [headerAlign, setHeaderAlign] = useState(collection.headerAlign || "center");
   const [subheaderAlign, setSubheaderAlign] = useState(collection.subheaderAlign || "center");
+  const [headerTextColor, handleHeaderTextColor] = useControlledFormInput(collection.headerTextColor, setHeaderTextColor);
+  const [subheaderTextColor, handleSubheaderTextColor] = useControlledFormInput(collection.subheaderTextColor, setSubheaderTextColor);
   const {id} = useParams();
 
   useEffect(() => {
@@ -71,8 +77,18 @@ const EditCollection = ({collection,
       {isLoaded && <Segment basic>
         <EditHeading currentHeading={collection.heading}/>
         <Dropdown placeholder='Alignment' fluid search selection options={headerLocationOptions} value={headerAlign} onChange={handleHeaderAlignChange}/>
+        <Dropdown
+          text='Header Color' floating labeled button className='icon'
+          defaultValue={headerTextColor}
+          options={colorOptions['colors']}
+          onChange={handleHeaderTextColor}/>
         <EditSubheading currentSubheading={collection.subheading}/>
         <Dropdown placeholder='Alignment' fluid search selection options={headerLocationOptions} value={subheaderAlign} onChange={handleSubheaderAlignChange}/>
+        <Dropdown
+          text='Header Color' floating labeled button className='icon'
+          defaultValue={subheaderTextColor}
+          options={colorOptions['colors']}
+          onChange={handleSubheaderTextColor}/>
         <Header as='h3'>Links</Header>
         {collection.links.map(l =>
         <EditLink key={l.index} link={l}/>
@@ -119,7 +135,9 @@ const actionCreators = {
   getLinkCollection,
   addEmptyLinkToActiveCollection,
   setCollectionHeaderLocation,
-  setCollectionSubheaderLocation
+  setCollectionSubheaderLocation,
+  setHeaderTextColor,
+  setSubheaderTextColor
 };
 
 export default connect(mapStateToProps, actionCreators)(EditCollection);
