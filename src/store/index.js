@@ -17,6 +17,6 @@ const initialState = {
 };
 
 const store = createStore(rootReducer, initialState, middleware);
-sessionService.initSessionService(store);
+sessionService.initSessionService(store, {driver: 'COOKIES'});
 
 export default store;

@@ -23,7 +23,7 @@ const auth = store => next => async action => {
       //Automatically logout once token is expired
       setTimeout(() => {
         store.dispatch(logout());
-      }, expiry);
+      }, expiry - Date.now());
       action.history.push('/');
       break;
     case actions.LOGOUT:
