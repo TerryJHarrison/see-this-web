@@ -52,7 +52,7 @@ const LinkCollection = ({getLinkCollection, collection, recordLinkClick}) => {
     });
   });
 
-  if(!isLoaded) {
+  if(!isLoaded || !collection) {
     return (
       <Segment textAlign="center">
         <Dimmer active inverted>
@@ -110,9 +110,13 @@ const LinkCollection = ({getLinkCollection, collection, recordLinkClick}) => {
   );
 }
 
+const mapStateToProps = state => ({
+  collection: state.links.activeCollection
+});
+
 const actionCreators = {
   getLinkCollection,
   recordLinkClick
 };
 
-export default connect(null, actionCreators)(LinkCollection);
+export default connect(mapStateToProps, actionCreators)(LinkCollection);
