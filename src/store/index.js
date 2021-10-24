@@ -13,6 +13,10 @@ const initialState = {
     collections: [],
     created: [],
     activeCollection: {}
+  },
+  user: {
+    images: [],
+    imgurApiKey: ''
   }
 };
 

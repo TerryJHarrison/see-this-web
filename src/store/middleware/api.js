@@ -8,7 +8,7 @@ import {
   setOwnedLinkCollections,
   setOwnedLinks
 } from "../actions/links";
-import {getLinkCollection, getOwnedLinks} from "../actions/api";
+import {getLinkCollection, getOwnedLinks, setUserData} from "../actions/api";
 
 const axios = require('axios').default;
 
@@ -145,6 +145,13 @@ const api = store => next => async action => {
       const response = await userApiGet(`collections/${action.id}`);
       store.dispatch(setLinkCollection(response["data"]));
     } break;
+    case actions.GET_USER_DATA: {
+      const response = await userApiGet(`users`);
+      store.dispatch(setUserData(response["data"]));
+    } break;
+    case actions.UPDATE_USER_DATA:
+      await userApiPatch(`users`, action.userData);
+      break;
     case actions.RECORD_LINK_CLICK:
       apiPatch(`collections/${action.collectionId}/link/${action.linkIndex}`).then();
       break;

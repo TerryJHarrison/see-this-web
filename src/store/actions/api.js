@@ -73,6 +73,26 @@ export const getLinkCollection = id => ({
   }
 });
 
+export const getUserData = () => ({
+  type: actions.GET_USER_DATA,
+  meta: {
+    throttle: 1000
+  }
+});
+
+export const setUserData = userData => ({
+  type: actions.SET_USER_DATA,
+  userData: userData
+});
+
+export const updateUserData = userData => ({
+  type: actions.UPDATE_USER_DATA,
+  userData: userData,
+  meta: {
+    throttle: 500
+  }
+});
+
 export const addEmptyLinkToActiveCollection = () => ({
   type: actions.ADD_EMPTY_LINK_TO_ACTIVE_COLLECTION
 });

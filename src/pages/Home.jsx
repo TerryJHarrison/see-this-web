@@ -3,11 +3,11 @@ import {connect} from "react-redux";
 import {createShortLink} from "../store/actions/api";
 import CreatedLinks from "../components/CreatedLinks";
 import {Link} from "react-router-dom";
-import {useFormInput} from "../hooks/useFormState";
+import {useFormState} from "../hooks/useFormState";
 
 export const Home = ({createShortLink}) => {
-  const [link, handleLinkChange] = useFormInput('');
-  const [url, handleUrlChange] = useFormInput('');
+  const [link, handleLinkChange] = useFormState('');
+  const [url, handleUrlChange] = useFormState('');
 
   const submit = () => {createShortLink(link, url)};
 

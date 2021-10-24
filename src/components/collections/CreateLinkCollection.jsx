@@ -1,10 +1,10 @@
 import {Button, Form, Header, Label, Segment} from "semantic-ui-react";
 import {connect} from "react-redux";
 import {createShortLinkCollection} from "../../store/actions/api";
-import {useFormInput} from "../../hooks/useFormState";
+import {useFormState} from "../../hooks/useFormState";
 
 export const CreatedLinkCollection = ({createShortLinkCollection}) => {
-  const [name, handleNameChange] = useFormInput('');
+  const [name, handleNameChange] = useFormState('');
 
   const submit = () => {createShortLinkCollection(name)};
 

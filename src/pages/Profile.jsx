@@ -1,14 +1,19 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {connect} from 'react-redux';
 import {closeAccount, logout} from '../store/actions/auth';
-import {getOwnedLinks} from '../store/actions/api';
+import {getOwnedLinks, getUserData} from '../store/actions/api';
 import {Redirect} from 'react-router-dom';
 import {Button, Grid, GridColumn, GridRow, Segment} from "semantic-ui-react";
 import OwnedLinks from "../components/OwnedLinks";
+import MediaCollection from "../components/images/MediaCollection";
 
-export const Profile = ({email, username, logout, ownedLinks, closeAccount}) => {
+export const Profile = ({email, username, logout, ownedLinks, closeAccount, userImages, userImgurApiKey, getUserData}) => {
   const [logoutRedirect, setLogoutRedirect] = useState(false);
   const [closeRedirect, setCloseRedirect] = useState(false);
+
+  useEffect(() => {
+    getUserData();
+  });
 
   const logoutCall = () => {
     logout();
@@ -43,6 +48,9 @@ export const Profile = ({email, username, logout, ownedLinks, closeAccount}) => 
           <GridRow><GridColumn>
             <OwnedLinks/>
           </GridColumn></GridRow>
+          <GridRow><GridColumn>
+            <MediaCollection/>
+          </GridColumn></GridRow>
           <GridRow columns={3}>
             <GridColumn><Button className="olive" onClick={logoutCall}>Logout</Button></GridColumn>
             <GridColumn>
@@ -58,13 +66,16 @@ export const Profile = ({email, username, logout, ownedLinks, closeAccount}) => 
 const mapStateToProps = state => ({
   email: state.session.user.email,
   username: state.session.user.username,
-  ownedLinks: state.links.owned
+  ownedLinks: state.links.owned,
+  userImages: state.user.images,
+  userImgurApiKey: state.user.imgurApiKey
 });
 
 const actionCreators = {
   logout,
   closeAccount,
-  getOwnedLinks
+  getOwnedLinks,
+  getUserData
 };
 
 export default connect(mapStateToProps, actionCreators)(Profile);
