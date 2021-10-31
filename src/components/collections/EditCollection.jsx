@@ -150,7 +150,7 @@ const EditCollection = ({
         <Label>Choose Font</Label>
         <Segment basic/>
         <Header as='h2'>Collection QR Code</Header>
-        <QRCode value={`https://seeth.is/profile/${collection.id}`} imageSettings={{src: qrCodeImage, width:25, height:25}}/>
+        <QRCode value={`https://seeth.is/profile/${collection.id}`} imageSettings={{src: qrCodeImage, width: 25, height: 25}}/>
         <Header as='h2'>Preview </Header>
         <NavLink to="/collections/preview"><Icon name="desktop"/>See on Desktop</NavLink>
         <MobileCollectionPreview/>

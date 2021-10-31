@@ -19,6 +19,16 @@ export const setProfileImage = imageId => ({
   imageId: imageId
 });
 
+export const setProfileImageShape = shape => ({
+  type: actions.SET_PROFILE_IMAGE_SHAPE,
+  shape: shape
+});
+
+export const setProfileImageSize = size => ({
+  type: actions.SET_PROFILE_IMAGE_SIZE,
+  size: size
+});
+
 export const setQRCodeImage = imageId => ({
   type: actions.SET_QR_CODE_IMAGE,
   imageId: imageId

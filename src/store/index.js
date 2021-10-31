@@ -18,6 +18,8 @@ const initialState = {
     images: [],
     imgurApiKey: '',
     profileImage: '',
+    profileImageShape: 'circle',
+    profileImageSize: 'tiny',
     qrCodeImage: ''
   }
 };

@@ -23,6 +23,14 @@ const auth = store => next => async action => {
       await store.dispatch(updateUserData({profileImage: action.imageId}));
       store.dispatch(getUserData());
       break;
+    case actions.SET_PROFILE_IMAGE_SIZE:
+      await store.dispatch(updateUserData({profileImageSize: action.size}));
+      store.dispatch(getUserData());
+      break;
+    case actions.SET_PROFILE_IMAGE_SHAPE:
+      await store.dispatch(updateUserData({profileImageShape: action.shape}));
+      store.dispatch(getUserData());
+      break;
     case actions.SET_QR_CODE_IMAGE:
       await store.dispatch(updateUserData({qrCodeImage: action.imageId}));
       store.dispatch(getUserData());
