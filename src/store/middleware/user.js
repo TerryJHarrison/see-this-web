@@ -16,10 +16,17 @@ const auth = store => next => async action => {
     } break;
     case actions.REMOVE_IMAGE: {
       let images = store.getState().user.images.filter(i => i.index !== action.index);
-      // if(images.length === 0){images = null;}
       await store.dispatch(updateUserData({images}));
       store.dispatch(getUserData());
     } break;
+    case actions.SET_PROFILE_IMAGE:
+      await store.dispatch(updateUserData({profileImage: action.imageId}));
+      store.dispatch(getUserData());
+      break;
+    case actions.SET_QR_CODE_IMAGE:
+      await store.dispatch(updateUserData({qrCodeImage: action.imageId}));
+      store.dispatch(getUserData());
+      break;
     default:
       break;
   }

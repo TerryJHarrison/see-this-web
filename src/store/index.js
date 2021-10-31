@@ -16,7 +16,9 @@ const initialState = {
   },
   user: {
     images: [],
-    imgurApiKey: ''
+    imgurApiKey: '',
+    profileImage: '',
+    qrCodeImage: ''
   }
 };
 

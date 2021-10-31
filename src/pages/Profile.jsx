@@ -3,11 +3,21 @@ import {connect} from 'react-redux';
 import {closeAccount, logout} from '../store/actions/auth';
 import {getOwnedLinks, getUserData} from '../store/actions/api';
 import {Redirect} from 'react-router-dom';
-import {Button, Grid, GridColumn, GridRow, Segment} from "semantic-ui-react";
+import {Button, Grid, GridColumn, GridRow, Image, Segment} from "semantic-ui-react";
 import OwnedLinks from "../components/OwnedLinks";
 import MediaCollection from "../components/images/MediaCollection";
 
-export const Profile = ({email, username, logout, ownedLinks, closeAccount, userImages, userImgurApiKey, getUserData}) => {
+export const Profile = ({
+  email,
+  username,
+  logout,
+  ownedLinks,
+  closeAccount,
+  userImages,
+  userImgurApiKey,
+  getUserData,
+  profileImage
+}) => {
   const [logoutRedirect, setLogoutRedirect] = useState(false);
   const [closeRedirect, setCloseRedirect] = useState(false);
 
@@ -40,7 +50,7 @@ export const Profile = ({email, username, logout, ownedLinks, closeAccount, user
     <Redirect to="/logout"/> :
     closeRedirect ? <Redirect to="/profile/close"/> : (
       <Segment>
-        <h1 className="center">@{username}'s Profile</h1>
+        {profileImage ? <Image circular href={userImages[profileImage]}/> : null}<h1 className="center">@{username}'s Profile</h1>
         <Grid>
           <GridRow><GridColumn>
             <span>Email - {email}</span>

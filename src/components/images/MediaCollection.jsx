@@ -13,7 +13,7 @@ import {
   TableRow
 } from "semantic-ui-react";
 import AddImageButton from "./AddImageButton";
-import {removeImage} from "../../store/actions/user";
+import {removeImage, setProfileImage, setQRCodeImage} from "../../store/actions/user";
 
 const ImagePreview = ({imageUrl}) => {
   return (
@@ -39,7 +39,31 @@ const RemoveImage = ({index, removeImage}) => {
   );
 }
 
-const MediaCollection = ({images, removeImage}) => {
+const SetProfilePicture = ({imageId, setProfileImage}) => {
+  const setImageOnClick = () => {
+    setProfileImage(imageId);
+  };
+
+  return (
+    <Button icon className="blue" circular onClick={setImageOnClick}>
+      <Icon name='user'/>
+    </Button>
+  );
+}
+
+const SetQRCodePicture = ({imageId, setQRCodeImage}) => {
+  const setImageOnClick = () => {
+    setQRCodeImage(imageId);
+  };
+
+  return (
+    <Button icon className="blue" circular onClick={setImageOnClick}>
+      <Icon name='qrcode'/>
+    </Button>
+  );
+}
+
+const MediaCollection = ({images, removeImage, setProfileImage, setQRCodeImage}) => {
   if(images.length === 0){
       return (
         <Container textAlign="center">
@@ -57,7 +81,7 @@ const MediaCollection = ({images, removeImage}) => {
           <TableRow>
             <TableHeaderCell>Text</TableHeaderCell>
             <TableHeaderCell>URL</TableHeaderCell>
-            <TableHeaderCell></TableHeaderCell>
+            <TableHeaderCell/>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -67,6 +91,8 @@ const MediaCollection = ({images, removeImage}) => {
               <TableCell><ImagePreview imageUrl={i.url}/></TableCell>
               <TableCell>
                 <RemoveImage index={i.index} removeImage={removeImage}/>
+                <SetProfilePicture imageId={i.index} setProfileImage={setProfileImage}/>
+                <SetQRCodePicture imageId={i.index} setQRCodeImage={setQRCodeImage}/>
               </TableCell>
             </TableRow>
           )}
@@ -80,7 +106,9 @@ const MediaCollection = ({images, removeImage}) => {
 }
 
 const actionCreators = {
-  removeImage
+  removeImage,
+  setProfileImage,
+  setQRCodeImage
 };
 
 const mapStateToProps = state => ({
