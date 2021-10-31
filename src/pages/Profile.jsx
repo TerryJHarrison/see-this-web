@@ -7,6 +7,15 @@ import {Button, Grid, GridColumn, GridRow, Image, Segment} from "semantic-ui-rea
 import OwnedLinks from "../components/OwnedLinks";
 import MediaCollection from "../components/images/MediaCollection";
 
+const ProfileImageIcon = ({userImages, profileImage}) => {
+  if(!profileImage){
+    return null;
+  }
+
+  const profileImageUrl = userImages.filter(i => i.index === profileImage)[0]['url'];
+  return <Image avatar size="tiny" src={profileImageUrl}/>;
+};
+
 export const Profile = ({
   email,
   username,
@@ -50,11 +59,9 @@ export const Profile = ({
     <Redirect to="/logout"/> :
     closeRedirect ? <Redirect to="/profile/close"/> : (
       <Segment>
-        {profileImage ? <Image circular href={userImages[profileImage]}/> : null}<h1 className="center">@{username}'s Profile</h1>
+        <h1 className="center"><ProfileImageIcon userImages={userImages} profileImage={profileImage}/>@{username}</h1>
+        <h5>{email}</h5>
         <Grid>
-          <GridRow><GridColumn>
-            <span>Email - {email}</span>
-          </GridColumn></GridRow>
           <GridRow><GridColumn>
             <OwnedLinks/>
           </GridColumn></GridRow>
@@ -78,7 +85,8 @@ const mapStateToProps = state => ({
   username: state.session.user.username,
   ownedLinks: state.links.owned,
   userImages: state.user.images,
-  userImgurApiKey: state.user.imgurApiKey
+  userImgurApiKey: state.user.imgurApiKey,
+  profileImage: state.user.profileImage
 });
 
 const actionCreators = {

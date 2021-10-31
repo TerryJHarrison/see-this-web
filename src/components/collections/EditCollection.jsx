@@ -47,16 +47,18 @@ const headerSizeOptions = [
   {key: 'h5', value: 'h5', text: 'H5'}
 ];
 
-const EditCollection = ({collection,
-                          getLinkCollection,
-                          addEmptyLinkToActiveCollection,
-                          updateShortLinkCollection,
-                          setCollectionHeaderAlign,
-                          setCollectionSubheaderAlign,
-                          setHeaderTextColor,
-                          setSubheaderTextColor,
-                          setHeaderTextSize,
-                          setSubheaderTextSize
+const EditCollection = ({
+  collection,
+  getLinkCollection,
+  addEmptyLinkToActiveCollection,
+  updateShortLinkCollection,
+  setCollectionHeaderAlign,
+  setCollectionSubheaderAlign,
+  setHeaderTextColor,
+  setSubheaderTextColor,
+  setHeaderTextSize,
+  setSubheaderTextSize,
+  qrCodeImage
 }) => {
   const [isLoaded, setLoaded] = useState(false);
   const [headerAlign, setHeaderAlign] = useState(collection.headerAlign || "center");
@@ -148,7 +150,7 @@ const EditCollection = ({collection,
         <Label>Choose Font</Label>
         <Segment basic/>
         <Header as='h2'>Collection QR Code</Header>
-        <QRCode value={`https://seeth.is/profile/${collection.id}`} imageSettings={{src:"/logo192.png", width:25, height:25}}/>
+        <QRCode value={`https://seeth.is/profile/${collection.id}`} imageSettings={{src: qrCodeImage, width:25, height:25}}/>
         <Header as='h2'>Preview </Header>
         <NavLink to="/collections/preview"><Icon name="desktop"/>See on Desktop</NavLink>
         <MobileCollectionPreview/>
@@ -158,7 +160,8 @@ const EditCollection = ({collection,
 };
 
 const mapStateToProps = state => ({
-  collection: state.links.activeCollection
+  collection: state.links.activeCollection,
+  qrCodeImage: state.user.images.filter(i => i.index === state.user.qrCodeImage)[0]['url'] || "/logo192.png"
 });
 
 const actionCreators = {
