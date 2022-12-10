@@ -123,6 +123,7 @@ const api = store => next => async action => {
     case actions.UPDATE_SHORT_LINK_COLLECTION:
       const data = store.getState();
       const {links: {activeCollection}} = data;
+      console.info(activeCollection);
       try {
         if (data.session.authenticated) {
           await userApiPatch('collections', activeCollection);

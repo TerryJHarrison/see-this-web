@@ -99,6 +99,13 @@ export const setLinkIconSize = (index, iconSize) => ({
   iconSize: iconSize
 });
 
+
+export const setLinkIconColor = (index, iconColor) => ({
+  type: actions.SET_LINK_ICON_COLOR,
+  index: index,
+  iconColor: iconColor
+});
+
 export const setLinkIconLocation = (index, iconLocation) => ({
   type: actions.SET_LINK_ICON_LOCATION,
   index: index,

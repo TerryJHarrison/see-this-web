@@ -7,12 +7,15 @@ import {
   setLinkRedirectUrl,
   setLinkShouldOpenInNewTab,
   setLinkIcon,
-  setLinkIconSize, setLinkIconLocation
+  setLinkIconSize,
+  setLinkIconLocation,
+  setLinkIconColor
 } from "../../store/actions/links";
 import {useFormModal} from "../../hooks/useFormModal";
+import "../../css/options.css";
 
 const iconOptions = [
-  {key: 'none', value: '', text: 'No Icon'},
+  {key: 'none', text: 'No Icon', value: ''},
   {key: 'blind', icon: 'blind', value: 'blind'},
   {key: 'braille', icon: 'braille', value: 'braille'},
 ]
@@ -23,18 +26,34 @@ const iconSizeOptions = [
   {key: 'large', value: 'big', text: 'Large'},
 ]
 
+const iconColorOptions = [
+  {key: 'black', value: 'black', text: 'Black'},
+  {key: 'red', value: 'red', text: 'Red'}
+]
+
 const iconLocationOptions = [
   {key: 'after', value: 'right', text: 'After link'},
   {key: 'before', value: 'left', text: 'Before link'},
 ]
 
-const EditLink = ({link, removeLinkFromActiveCollection, setLinkText, setLinkRedirectUrl, setLinkShouldOpenInNewTab, setLinkIcon, setLinkIconSize, setLinkIconLocation}) => {
+const EditLink = ({
+  link,
+  removeLinkFromActiveCollection,
+  setLinkText,
+  setLinkRedirectUrl,
+  setLinkShouldOpenInNewTab,
+  setLinkIcon,
+  setLinkIconSize,
+  setLinkIconColor,
+  setLinkIconLocation
+}) => {
   const {index, clickCount} = link;
   const [text, setText] = useState(link.text);
   const [redirectUrl, setRedirectUrl] = useState(link.redirectUrl);
   const [shouldOpenInNewTab, setShouldOpenInNewTab] = useState(link.shouldOpenInNewTab);
   const [icon, setIcon] = useState(link.icon);
   const [iconSize, setIconSize] = useState(link.iconSize);
+  const [iconColor, setIconColor] = useState(link.iconColor);
   const [iconLocation, setIconLocation] = useState(link.iconLocation);
   const [isOpen, open, close] = useFormModal();
 
@@ -58,6 +77,11 @@ const EditLink = ({link, removeLinkFromActiveCollection, setLinkText, setLinkRed
     setLinkIconSize(index, value);
   };
 
+  const handleIconColorChange = (e, {value}) => {
+    setIconColor(value);
+    setLinkIconColor(index, value);
+  };
+
   const handleIconLocationChange = (e, {value}) => {
     setIconLocation(value);
     setLinkIconLocation(index, value);
@@ -65,6 +89,7 @@ const EditLink = ({link, removeLinkFromActiveCollection, setLinkText, setLinkRed
 
   const handleDeleteClick = () => {
     removeLinkFromActiveCollection(index);
+    close();
   };
 
   const toggleShouldOpenInNewTab = () => {
@@ -92,8 +117,9 @@ const EditLink = ({link, removeLinkFromActiveCollection, setLinkText, setLinkRed
               </GridColumn>
               <GridColumn width={2} verticalAlign="bottom">
                 <Dropdown placeholder='Icon' fluid search selection options={iconOptions} icon={icon} onChange={handleIconChange}/>
-                <Dropdown placeholder='Size' fluid search selection options={iconSizeOptions} value={iconSize} onChange={handleIconSizeChange}/>
-                <Dropdown placeholder='After link' fluid search selection options={iconLocationOptions} value={iconLocation || "right"} onChange={handleIconLocationChange}/>
+                <Dropdown placeholder='Size' fluid search selection options={iconSizeOptions} value={iconSize} onChange={handleIconSizeChange} className={icon === "" ? 'hidden' : ''}/>
+                <Dropdown placeholder='Color' fluid search selection options={iconColorOptions} value={iconColor} onChange={handleIconColorChange} className={icon === "" ? 'hidden' : ''}/>
+                <Dropdown placeholder='After link' fluid search selection options={iconLocationOptions} value={iconLocation || "right"} onChange={handleIconLocationChange} className={icon === "" ? 'hidden' : ''}/>
               </GridColumn>
               <GridColumn width={1} verticalAlign="bottom">
                 <Modal onOpen={open} onClose={close} open={isOpen}
@@ -126,6 +152,7 @@ const actionCreators = {
   setLinkShouldOpenInNewTab,
   setLinkIcon,
   setLinkIconSize,
+  setLinkIconColor,
   setLinkIconLocation
 }
 

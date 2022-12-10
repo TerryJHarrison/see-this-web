@@ -38,7 +38,7 @@ const mapStateToProps = state => ({
 });
 
 const actionCreators = {
-  setButtonColor
+  setButtonHoverColor
 };
 
 export default connect(mapStateToProps, actionCreators)(EditButtonHoverColor);

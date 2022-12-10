@@ -9,8 +9,13 @@ const OwnedLinksActions = ({collection}) => {
     history.push(`/profile/collections/${collection}`);
   };
 
+  const viewLinkCollectionClick = () => {
+    history.push(`/portfolio/${collection}`);
+  };
+
   return (
     <Fragment>
+      <Button color="blue" onClick={viewLinkCollectionClick} icon="eye" compact circular/>
       <Button positive onClick={updateLinkCollectionClick} icon="edit" compact circular/>
     </Fragment>
   )

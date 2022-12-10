@@ -125,6 +125,17 @@ function links(state = {}, action) {
         })
       });
     }
+    case actions.SET_LINK_ICON_COLOR: {
+      const links = state.activeCollection.links;
+      const link = links[action.index];
+      link.iconColor = action.iconColor;
+      links[action.index] = link;
+      return Object.assign([], state, {
+        activeCollection: Object.assign({}, state.activeCollection, {
+          links: links
+        })
+      });
+    }
     case actions.SET_LINK_ICON_LOCATION: {
       const links = state.activeCollection.links;
       const link = links[action.index];
@@ -139,7 +150,7 @@ function links(state = {}, action) {
     case actions.ADD_EMPTY_LINK_TO_ACTIVE_COLLECTION:
       return Object.assign([], state, {
         activeCollection: Object.assign({}, state.activeCollection, {
-          links: [...state.activeCollection.links, {index: state.activeCollection.links.length.toString(), redirectUrl: "", text: ""}]
+          links: [...state.activeCollection.links, {index: state.activeCollection.links.length.toString(), redirectUrl: "", text: "", icon: ""}]
         })
       });
     case actions.REMOVE_LINK_FROM_ACTIVE_COLLECTION:

@@ -82,11 +82,13 @@ const EditCollection = ({
   const handleHeaderAlignChange = (e, {value}) => {
     setHeaderAlign(value);
     setCollectionHeaderAlign(value);
+    updateShortLinkCollection(id, collection);
   };
 
   const handleSubheaderAlignChange = (e, {value}) => {
     setSubheaderAlign(value);
     setCollectionSubheaderAlign(value);
+    updateShortLinkCollection(id, collection);
   };
 
   return (
@@ -161,7 +163,7 @@ const EditCollection = ({
 
 const mapStateToProps = state => ({
   collection: state.links.activeCollection,
-  qrCodeImage: state.user.images.filter(i => i.index === state.user.qrCodeImage)[0]['url'] || "/logo192.png"
+  qrCodeImage: (state.user.images.filter(i => i.index === state.user.qrCodeImage)[0] && state.user.images.filter(i => i.index === state.user.qrCodeImage)[0]['url']) || "/logo192.png"
 });
 
 const actionCreators = {

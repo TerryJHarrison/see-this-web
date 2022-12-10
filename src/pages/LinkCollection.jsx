@@ -14,7 +14,19 @@ const IconOnRight = ({text, icon, iconColor, iconSize}) => {
   return <Fragment>{text}&nbsp;&nbsp;<Icon color={iconColor} name={icon} size={iconSize}/></Fragment>
 }
 
-const LinkContents = ({id, handleLinkClick, buttonColor, buttonHoverColor, iconLocation, textColor, textHoverColor, text, icon, iconColor, iconSize}) => {
+const LinkContents = ({
+  id,
+  handleLinkClick,
+  buttonColor,
+  buttonHoverColor,
+  iconLocation,
+  textColor,
+  textHoverColor,
+  text,
+  icon,
+  iconColor,
+  iconSize
+}) => {
 
   const [activeButtonColor, setActiveButtonColor] = useState(buttonColor);
   const [activeTextColor, setActiveTextColor] = useState(textColor);
