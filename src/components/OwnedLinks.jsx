@@ -1,4 +1,4 @@
-import React, {lazy, useEffect, useState} from "react";
+import React, {lazy, Suspense, useEffect, useState} from "react";
 import {connect} from "react-redux";
 import {
   Button,
@@ -65,7 +65,7 @@ const OwnedLinks = ({ownedLinks, getOwnedLinks}) => {
               <TableCell>{l.redirectUrl}</TableCell>
               <TableCell>{l.expiresAt ? `${new Date(l.expiresAt * 1000).toLocaleString()}` : 'Never!'}</TableCell>
               <TableCell>{l.clickCount}</TableCell>
-              <TableCell><OwnedLinksActions link={l.link}/></TableCell>
+              <TableCell><Suspense fallback={null}><OwnedLinksActions link={l.link}/></Suspense></TableCell>
             </TableRow>
           )}
         </TableBody>
