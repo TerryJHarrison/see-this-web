@@ -1,6 +1,6 @@
-import {Fragment} from "react";
+import {Fragment, lazy} from "react";
 import {connect} from "react-redux";
-import Toast from "./Toast";
+const Toast = lazy(() => import('./Toast'));
 
 const ToastDisplay = ({toasts}) => {
   return <Fragment>

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {lazy, useEffect, useState} from "react";
 import {connect} from "react-redux";
 import {
   Button,
@@ -14,7 +14,8 @@ import {
 } from "semantic-ui-react";
 import {getOwnedLinks} from "../store/actions/api";
 import {addSuccessToast} from "../store/actions/toasts";
-import OwnedLinksActions from "./OwnedLinksActions";
+
+const OwnedLinksActions = lazy(() => import('./OwnedLinksActions'));
 
 const OwnedLinks = ({ownedLinks, getOwnedLinks}) => {
   const [isLoaded, setLoaded] = useState(false);
