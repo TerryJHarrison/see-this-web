@@ -4,9 +4,9 @@ permissions:
   id-token: write
 
 on:
+  paths-ignore:
+    - "/.github/workflows/lighthouse.yml"
   push:
-    paths-ignore:
-      - "/.github/workflows/lighthouse.yml"
     branches:
       - main
 

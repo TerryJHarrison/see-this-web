@@ -5,7 +5,8 @@ on:
 
 jobs:
   build-and-deploy:
-    runs-on: tjharrison/gha-lighthouse-reports
+    runs-on: ubuntu-latest
+    container: tjharrison/gha-lighthouse-reports
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
