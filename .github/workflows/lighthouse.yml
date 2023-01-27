@@ -1,0 +1,28 @@
+name: Lighthouse Report
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+
+      - name: Run Report
+        run: |
+          npm install lighthouse -g
+          lighthouse https://seeth.is --config-path=./lighthouse.js --output json --output html --output-path ./report.json
+
+      - name: Save HTML Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: lighthouse-report-html
+          path: ./report.html
+
+      - name: Save JSON Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: lighthouse-report-json
+          path: ./report.json
