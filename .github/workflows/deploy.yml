@@ -35,4 +35,5 @@ jobs:
           name: webapp
           path: build/
 
-#      - name: Lighthouse Report
+      - name: Lighthouse Report
+        uses: ./.github/workflows/lighthouse.yml
