@@ -19,10 +19,10 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: lighthouse-report-html
-          path: ./report.html
+          path: ./see-this-web.report.html
 
       - name: Save JSON Artifact
         uses: actions/upload-artifact@v3
         with:
           name: lighthouse-report-json
-          path: ./report.json
+          path: ./see-this-web.report.json
