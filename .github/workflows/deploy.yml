@@ -27,7 +27,7 @@ jobs:
           npm run deploy
 
       - name: Save Artifact
-      - uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v3
         with:
           name: webapp
           path: build/
