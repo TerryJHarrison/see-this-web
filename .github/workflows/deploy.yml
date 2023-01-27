@@ -26,7 +26,7 @@ jobs:
 
       - name: Build & Deploy
         run: |
-          npm install
+          npm install --legacy-peer-deps
           npm run deploy
 
       - name: Save Artifact
