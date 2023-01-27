@@ -6,7 +6,8 @@ permissions:
 on:
   push:
     paths-ignore:
-      - "/.github/workflows/lighthouse.yml"
+      - ".github/workflows/lighthouse.yml"
+      - "lighthouse.js"
     branches:
       - main
 

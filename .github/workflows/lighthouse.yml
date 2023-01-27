@@ -14,7 +14,7 @@ jobs:
       - name: Run Report
         run: |
           npm install lighthouse -g
-          lighthouse https://seeth.is --config-path=./lighthouse.js --output json --output html --output-path ./report.json
+          lighthouse https://seeth.is --config-path=./lighthouse.js --output json --output html --output-path ./report.json --chrome-flags headless
 
       - name: Save HTML Artifact
         uses: actions/upload-artifact@v3
