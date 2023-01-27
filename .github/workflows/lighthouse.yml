@@ -13,16 +13,16 @@ jobs:
 
       - name: Run Report
         run: |
-          lighthouse --chrome-flags="--headless --disable-gpu --no-sandbox" https://seeth.is --output html --output json --output-path ./
+          lighthouse --chrome-flags="--headless --disable-gpu --no-sandbox" https://seeth.is --output html --output json --output-path ./see-this
 
       - name: Save HTML Artifact
         uses: actions/upload-artifact@v3
         with:
           name: lighthouse-report-html
-          path: ./see-this-web.report.html
+          path: ./see-this.report.html
 
       - name: Save JSON Artifact
         uses: actions/upload-artifact@v3
         with:
           name: lighthouse-report-json
-          path: ./see-this-web.report.json
+          path: ./see-this.report.json
