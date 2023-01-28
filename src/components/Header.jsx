@@ -13,7 +13,7 @@ const Header = ({checked, authenticated, username}) => {
           <GridColumn width={4} floated="right" verticalAlign="middle">
             <Grid divided columns={3}>
               <GridRow align="center">
-                <GridColumn><NavLink to="/collections">Collections</NavLink></GridColumn>
+                <GridColumn><NavLink to="/">Links</NavLink></GridColumn>
                 <GridColumn><NavLink to="/api">API</NavLink></GridColumn>
                 <GridColumn>
                   { checked && authenticated ?
