@@ -6,6 +6,11 @@ export const addCreatedLink = (link, redirectUrl) => ({
   redirectUrl: redirectUrl
 });
 
+export const removeCreatedLink = link => ({
+  type: actions.REMOVE_CREATED_LINK,
+  link: link
+})
+
 export const setOwnedLinks = links => ({
   type: actions.SET_OWNED_LINKS,
   links: links

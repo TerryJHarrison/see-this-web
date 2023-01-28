@@ -17,6 +17,10 @@ function links(state = {}, action) {
           redirectUrl: action.redirectUrl
         }]
       });
+    case actions.REMOVE_CREATED_LINK:
+      return Object.assign({}, state, {
+        created: state.created.filter(l => l.link !== action.link)
+      });
     default:
       return state;
   }

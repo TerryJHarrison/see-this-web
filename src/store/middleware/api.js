@@ -1,7 +1,7 @@
 import * as actions from '../actions';
 import {sessionService} from 'redux-react-session';
 import {addFailureToast, addSuccessToast} from "../actions/toasts";
-import {addCreatedLink, removeOwnedLink, setOwnedLinks} from "../actions/links";
+import {addCreatedLink, removeCreatedLink, removeOwnedLink, setOwnedLinks} from "../actions/links";
 import {getOwnedLinks} from "../actions/api";
 
 const axios = require('axios').default;
@@ -80,9 +80,8 @@ const api = store => next => async action => {
           link: action.link
         });
 
-        //TODO: remove from createdLinks on home page
-
         store.dispatch(removeOwnedLink(action.link));
+        store.dispatch(removeCreatedLink(action.link));
         store.dispatch(addSuccessToast('Short link deleted', "It's gone. Recreate it now if you want to claim the link", 10000));
       } catch(e){
         if(e.response.status === 400){
