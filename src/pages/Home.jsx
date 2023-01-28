@@ -52,7 +52,7 @@ export const Home = ({createShortLink}) => {
         </Form>
         <Suspense fallback={null}><CreatedLinks/></Suspense>
         <Divider horizontal>How To Use</Divider>
-        <p>Enter in your desired short link path (or leave blank for an auto-generated one) and the URL you wish to link to. Submit and your link will be active within seconds! All generated links follow the form of <a href='https://seeth.is/l/easy-to-read'>seeth.is/l/easy-to-read</a>. Links will stay active for 7 days or <Link to="/register">register now</Link> to keep them active for 14 days.</p>
+        <p>Enter in your desired short link path (or leave blank for an auto-generated one) and the URL you wish to link to. Submit and your link will be active within seconds! All generated links follow the form of <a href='https://seeth.is/l/easy-to-read'>seeth.is/l/easy-to-read</a>. Links will stay active for 7 days or <Link to="/register">register now</Link> and they will last forever.</p>
       </Container>
     </Segment>
   );

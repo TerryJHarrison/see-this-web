@@ -4,7 +4,7 @@ function Register() {
   return (
     <Segment>
       <h2>Coming soon!</h2>
-      Registered users' links will stay active for twice as long (14 days)!
+      Registered users' links will stay active indefinitely!
     </Segment>
   );
 }
