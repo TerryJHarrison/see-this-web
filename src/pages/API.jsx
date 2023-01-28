@@ -1,6 +1,8 @@
 import {Button, Card, CardDescription, CardGroup, CardHeader, CardMeta, Container, Segment} from "semantic-ui-react";
+import {usePageLoad} from "../hooks/usePageLoad";
 
 function API() {
+  usePageLoad();
   return (
     <Segment textAlign='center'>
       <h1>SeeTh.is API</h1>

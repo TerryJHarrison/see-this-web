@@ -4,10 +4,12 @@ import {closeAccount, logout} from '../store/actions/auth';
 import {getOwnedLinks} from '../store/actions/api';
 import {Redirect} from 'react-router-dom';
 import {Button, Grid, GridColumn, GridRow, Segment} from "semantic-ui-react";
+import {usePageLoad} from "../hooks/usePageLoad";
 
 const OwnedLinks = lazy(() => import('../components/OwnedLinks'));
 
 export const Profile = ({email, username, logout, ownedLinks, closeAccount}) => {
+  usePageLoad();
   const [logoutRedirect, setLogoutRedirect] = useState(false);
   const [closeRedirect, setCloseRedirect] = useState(false);
 

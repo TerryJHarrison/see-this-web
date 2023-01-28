@@ -8,6 +8,7 @@ import {
 
 import './css/index.css'
 import {connect} from "react-redux";
+import {init} from "@amplitude/analytics-browser";
 
 const Header = lazy(() => import('./components/Header'));
 const Footer = lazy(() => import('./components/Footer'));
@@ -17,7 +18,6 @@ const API = lazy(() => import('./pages/API'));
 const Profile = lazy(() => import('./pages/Profile'));
 const Login = lazy(() => import('./components/authentication/Login'));
 const Logout = lazy(() => import('./components/authentication/Logout'));
-const Register = lazy(() => import('./components/authentication/Register'));
 const LoginCallback = lazy(() => import('./components/authentication/LoginCallback'));
 const LogoutCallback = lazy(() => import('./components/authentication/LogoutCallback'));
 const RegisterCallback = lazy(() => import('./components/authentication/RegisterCallback'));
@@ -26,6 +26,7 @@ const PrivateRoute = lazy(() => import('./components/authentication/PrivateRoute
 const ToastDisplay = lazy(() => import('./components/ToastDisplay'));
 
 
+init("583dd5bcdd6c5501fbe7dd9795d35c85");
 const AppRouter = ({checked}) => {
   return (
     <Router>
@@ -37,7 +38,6 @@ const AppRouter = ({checked}) => {
             <Route exact path="/" component={Home}/>
             <Route path="/api" component={API}/>
             <Route path="/example" component={Example}/>
-            <Route path="/register" exact component={Register}/>
             <Route path="/login" exact component={Login}/>
             <Route path="/logout" exact component={Logout}/>
             <Route path="/authorize/register" component={RegisterCallback}/>
