@@ -9,7 +9,7 @@ export function usePageLoad() {
     const data = {};
     data['url'] = `https://seeth.is${location.pathname}`;
     data[metric['name']] = metric['value'];
-    track('Web Vitals', data);
+    track('Web Vital', data);
   }), [location.pathname]);
 }
 
