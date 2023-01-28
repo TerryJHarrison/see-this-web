@@ -8,18 +8,18 @@ function links(state = {}, action) {
       });
     case actions.REMOVE_OWNED_LINK:
       return Object.assign({}, state, {
-        owned: state.owned.filter(l => l.link !== action.link)
+        owned: state.owned.filter(l => l.link.toLowerCase() !== action.link.toLowerCase())
       });
     case actions.ADD_CREATED_LINK:
       return Object.assign({}, state, {
         created: [...state.created, {
-          link: action.link,
+          link: action.link.toLowerCase(),
           redirectUrl: action.redirectUrl
         }]
       });
     case actions.REMOVE_CREATED_LINK:
       return Object.assign({}, state, {
-        created: state.created.filter(l => l.link !== action.link)
+        created: state.created.filter(l => l.link.toLowerCase() !== action.link.toLowerCase())
       });
     default:
       return state;

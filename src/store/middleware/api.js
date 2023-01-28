@@ -47,7 +47,7 @@ const api = store => next => async action => {
         }
 
         store.dispatch(addCreatedLink(response.data.link, action.url));
-        store.dispatch(addSuccessToast('Short link created', `Use it now: seeth.is/l/${response.data.link}`, 10000));
+        store.dispatch(addSuccessToast('Short link created', `Use it now: seeth.is/l/${response.data.link.toLowerCase()}`, 10000));
       } catch(e){
         if(e.response.status === 400){
           store.dispatch(addFailureToast('Already exists', 'That link already exists, try a different path'));
@@ -65,7 +65,7 @@ const api = store => next => async action => {
 
         store.dispatch(removeOwnedLink(action.link));
         store.dispatch(getOwnedLinks());
-        store.dispatch(addSuccessToast('Short link updated', `Use it now: seeth.is/l/${action.link}`, 10000));
+        store.dispatch(addSuccessToast('Short link updated', `Use it now: seeth.is/l/${action.link.toLowerCase()}`, 10000));
       } catch(e){
         if(e.response.status === 400){
           store.dispatch(addFailureToast('Bad request', 'Make sure you entered all data correctly'));
