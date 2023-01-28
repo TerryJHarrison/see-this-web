@@ -5,7 +5,7 @@ on:
   workflow_call:
 
 jobs:
-  report:
+  generate:
     runs-on: ubuntu-latest
     container: tjharrison/gha-lighthouse-reports
     steps:

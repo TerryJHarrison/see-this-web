@@ -80,6 +80,8 @@ const api = store => next => async action => {
           link: action.link
         });
 
+        //TODO: remove from createdLinks on home page
+
         store.dispatch(removeOwnedLink(action.link));
         store.dispatch(addSuccessToast('Short link deleted', "It's gone. Recreate it now if you want to claim the link", 10000));
       } catch(e){

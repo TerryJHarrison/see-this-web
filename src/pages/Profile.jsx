@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React, {useState, lazy, Suspense} from 'react';
 import {connect} from 'react-redux';
 import {closeAccount, logout} from '../store/actions/auth';
 import {getOwnedLinks} from '../store/actions/api';
 import {Redirect} from 'react-router-dom';
 import {Button, Grid, GridColumn, GridRow, Segment} from "semantic-ui-react";
-import OwnedLinks from "../components/OwnedLinks";
+
+const OwnedLinks = lazy(() => import('../components/OwnedLinks'));
 
 export const Profile = ({email, username, logout, ownedLinks, closeAccount}) => {
   const [logoutRedirect, setLogoutRedirect] = useState(false);
@@ -41,7 +42,7 @@ export const Profile = ({email, username, logout, ownedLinks, closeAccount}) => 
             <span>Email - {email}</span>
           </GridColumn></GridRow>
           <GridRow><GridColumn>
-            <OwnedLinks/>
+            <Suspense fallback={null}><OwnedLinks/></Suspense>
           </GridColumn></GridRow>
           <GridRow columns={3}>
             <GridColumn><Button className="olive" onClick={logoutCall}>Logout</Button></GridColumn>
